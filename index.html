@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CalculatrHub — Free Property & Mortgage Calculators</title>
+<meta name="description" content="Free, fast, and accurate mortgage and property calculators. UK mortgage repayment, stamp duty, affordability, buy-to-let yield and more."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;
+  --blue-light:#DBEAFE;
+  --blue-dark:#1E40AF;
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --gray-50:#F8F9FA;
+  --gray-100:#F1F3F5;
+  --gray-200:#E9ECEF;
+  --gray-400:#868E96;
+  --gray-600:#495057;
+  --gray-800:#212529;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:8px}
+.nav-links a{font-size:14px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:8px;transition:background 0.15s,color 0.15s;font-weight:400}
+.nav-links a:hover{background:var(--gray-100);color:var(--black)}
+
+/* HERO */
+.hero{padding:80px 24px 60px;text-align:center;background:var(--white)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue-dark);font-size:12px;font-weight:500;padding:5px 12px;border-radius:100px;margin-bottom:24px;letter-spacing:0.3px}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue)}
+h1{font-family:var(--font-display);font-size:clamp(36px,6vw,68px);font-weight:800;line-height:1.05;letter-spacing:-2px;color:var(--black);max-width:800px;margin:0 auto 20px}
+h1 span{color:var(--blue)}
+.hero-sub{font-size:18px;color:var(--gray-600);max-width:520px;margin:0 auto 40px;font-weight:300;line-height:1.6}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--white);font-family:var(--font-display);font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;text-decoration:none;transition:transform 0.15s,background 0.15s;letter-spacing:-0.2px}
+.hero-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.hero-cta svg{width:16px;height:16px}
+
+/* STATS */
+.stats{border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:28px 24px;background:var(--gray-50)}
+.stats-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--black);letter-spacing:-1px}
+.stat-label{font-size:13px;color:var(--gray-400);font-weight:400;margin-top:2px}
+
+/* CALCULATOR GRID */
+.section{padding:64px 24px;max-width:1100px;margin:0 auto}
+.section-label{font-size:12px;font-weight:500;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-1px;margin-bottom:8px;color:var(--black)}
+.section-sub{font-size:16px;color:var(--gray-600);margin-bottom:40px;font-weight:300}
+
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.calc-card{display:block;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;text-decoration:none;color:inherit;transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s;position:relative;overflow:hidden}
+.calc-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,99,235,0.1)}
+.calc-card.featured{border-color:var(--blue);background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 60%)}
+.calc-card-tag{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:12px;display:block}
+.calc-card h3{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;color:var(--black)}
+.calc-card p{font-size:14px;color:var(--gray-600);line-height:1.5;font-weight:300}
+.calc-card-arrow{position:absolute;top:28px;right:28px;width:32px;height:32px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;transition:background 0.15s}
+.calc-card:hover .calc-card-arrow{background:var(--blue)}
+.calc-card:hover .calc-card-arrow svg{stroke:white}
+.calc-card-arrow svg{width:14px;height:14px;stroke:var(--gray-400);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.calc-badge{display:inline-block;background:var(--blue-light);color:var(--blue-dark);font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px;letter-spacing:0.5px;margin-top:12px}
+
+/* FOOTER */
+footer{background:var(--black);color:rgba(255,255,255,0.5);padding:40px 24px;text-align:center}
+footer .footer-logo{font-family:var(--font-display);font-size:18px;font-weight:700;color:white;letter-spacing:-0.4px;margin-bottom:12px}
+footer p{font-size:13px;line-height:1.8}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none}
+footer a:hover{color:white}
+
+@media(max-width:640px){
+  .stats-inner{gap:32px}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">
+        <span></span><span></span>
+        <span></span><span></span>
+      </div>
+      <div class="logo-text">Calculatr<em>HUB</em></div>
+    </a>
+    <div class="nav-links">
+      <a href="/mortgage-calculator.html">Mortgage</a>
+      <a href="#">Stamp Duty</a>
+      <a href="#">Affordability</a>
+      <a href="#">Buy-to-Let</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Free · No sign-up · Instant results</div>
+  <h1>Every property<br/>calculator you <span>need</span></h1>
+  <p class="hero-sub">Fast, accurate calculators for mortgages, stamp duty, affordability and more. Built for buyers, sellers and investors worldwide.</p>
+  <a href="/mortgage-calculator.html" class="hero-cta">
+    Try mortgage calculator
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+  </a>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Calculators</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free forever</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Sign-ups needed</div></div>
+    <div class="stat"><div class="stat-num">UK &amp; US</div><div class="stat-label">Markets covered</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Calculators</div>
+  <h2 class="section-title">Start calculating</h2>
+  <p class="section-sub">Pick a calculator and get your answer in seconds.</p>
+
+  <div class="calc-grid">
+
+    <a href="/mortgage-calculator.html" class="calc-card featured">
+      <div class="calc-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <span class="calc-card-tag">Most popular</span>
+      <h3>Mortgage repayment</h3>
+      <p>Calculate your monthly repayments, total interest and see a full amortisation schedule.</p>
+      <span class="calc-badge">UK &amp; US</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <div class="calc-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <span class="calc-card-tag">Coming soon</span>
+      <h3>Stamp duty</h3>
+      <p>Instant stamp duty calculation including first-time buyer relief, second home and BTL surcharges.</p>
+    </a>
+
+    <a href="#" class="calc-card">
+      <div class="calc-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <span class="calc-card-tag">Coming soon</span>
+      <h3>Affordability</h3>
+      <p>Find out how much you can borrow based on your income, including self-employed SA302 calculations.</p>
+    </a>
+
+    <a href="#" class="calc-card">
+      <div class="calc-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <span class="calc-card-tag">Coming soon</span>
+      <h3>Buy-to-let yield</h3>
+      <p>Calculate gross and net rental yield, ROI and monthly cashflow on any investment property.</p>
+    </a>
+
+    <a href="#" class="calc-card">
+      <div class="calc-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <span class="calc-card-tag">Coming soon</span>
+      <h3>Overpayment</h3>
+      <p>See how much interest you save and how many years you cut off your mortgage by overpaying.</p>
+    </a>
+
+    <a href="#" class="calc-card">
+      <div class="calc-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <span class="calc-card-tag">Coming soon</span>
+      <h3>Remortgage savings</h3>
+      <p>Compare your current rate against a new deal and see exactly how much you would save.</p>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">CalculatrHub</div>
+  <p>Free property calculators for everyone.<br/>
+  <a href="#">Privacy</a> · <a href="#">Terms</a> · © 2026 CalculatrHub</p>
+</footer>
+
+</body>
+</html>

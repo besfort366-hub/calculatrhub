@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mortgage Calculator — CalculatrHub</title>
+<meta name="description" content="Free UK & US mortgage repayment calculator. Calculate monthly payments, total interest and get a full amortisation schedule instantly."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;
+  --blue-light:#DBEAFE;
+  --blue-dark:#1E40AF;
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --gray-50:#F8F9FA;
+  --gray-100:#F1F3F5;
+  --gray-200:#E9ECEF;
+  --gray-400:#868E96;
+  --gray-600:#495057;
+  --green:#059669;
+  --green-light:#D1FAE5;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link:hover{color:var(--black)}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+.breadcrumb a:hover{color:var(--blue)}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px;color:var(--black)}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+
+.main{max-width:1100px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:400px 1fr;gap:24px;align-items:start}
+
+/* FORM */
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px;color:var(--black)}
+
+.market-toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-100);border-radius:8px;padding:3px;margin-bottom:24px;gap:0}
+.market-toggle button{border:none;background:none;padding:8px;font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--gray-400);border-radius:6px;cursor:pointer;transition:all 0.15s}
+.market-toggle button.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-prefix{position:absolute;left:12px;font-size:14px;color:var(--gray-400);font-weight:500;pointer-events:none}
+.input-suffix{position:absolute;right:12px;font-size:13px;color:var(--gray-400);pointer-events:none}
+.input-wrap input{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;font-weight:400;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.input-wrap input:focus{border-color:var(--blue)}
+.has-prefix input{padding-left:28px}
+.has-suffix input{padding-right:40px}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.section-divider{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400);margin:20px 0 16px;padding-top:20px;border-top:1px solid var(--gray-100)}
+
+.calc-btn{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;letter-spacing:-0.2px;margin-top:4px}
+.calc-btn:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.calc-btn:active{transform:translateY(0)}
+
+/* RESULTS */
+.results{display:flex;flex-direction:column;gap:16px}
+.result-hero{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px}
+.result-hero-label{font-size:12px;font-weight:500;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.result-hero-amount{font-family:var(--font-body);font-size:clamp(32px,4vw,48px);font-weight:500;letter-spacing:-1px;color:var(--black)}
+.result-hero-sub{font-size:14px;color:var(--gray-400);margin-top:4px}
+.result-hero-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-100)}
+.result-mini-label{font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.result-mini-val{font-family:var(--font-body);font-size:20px;font-weight:500;letter-spacing:-0.3px;color:var(--black)}
+
+.breakdown-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px}
+.breakdown-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:14px}
+.breakdown-row:last-child{border-bottom:none;font-weight:500}
+.breakdown-row .label{color:var(--gray-600)}
+.breakdown-row .val{font-weight:500;color:var(--black)}
+
+/* BAR CHART */
+.bar-chart{margin-top:16px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px}
+.bar-track{flex:1;height:8px;background:var(--gray-100);border-radius:100px;overflow:hidden}
+.bar-fill{height:100%;border-radius:100px;transition:width 0.6s ease}
+.bar-label{min-width:80px;color:var(--gray-600)}
+.bar-val{min-width:80px;text-align:right;font-weight:500;color:var(--black)}
+
+/* AMORTISATION TABLE */
+.table-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;overflow:hidden}
+.table-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:gap}
+.table-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px}
+.table-toggle{display:flex;gap:8px}
+.table-toggle button{font-size:12px;font-family:var(--font-body);padding:5px 12px;border:1px solid var(--gray-200);background:white;border-radius:100px;cursor:pointer;color:var(--gray-600);transition:all 0.15s}
+.table-toggle button.active{background:var(--blue);color:white;border-color:var(--blue)}
+.amort-table{width:100%;border-collapse:collapse;font-size:13px;overflow:hidden}
+.amort-table thead th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.8px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+.amort-table tbody tr{border-bottom:1px solid var(--gray-100);transition:background 0.1s}
+.amort-table tbody tr:hover{background:var(--gray-50)}
+.amort-table tbody td{padding:9px 12px;color:var(--gray-800)}
+.amort-table tbody tr.year-row{background:var(--blue-light)}
+.amort-table tbody tr.year-row td{font-weight:600;color:var(--blue-dark);font-family:var(--font-display);font-size:12px;letter-spacing:0.5px}
+.table-wrapper{max-height:400px;overflow-y:auto;border-radius:8px;border:1px solid var(--gray-200)}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-400)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;display:block;opacity:0.3}
+.empty-state p{font-size:15px}
+
+@media(max-width:900px){
+  .main{grid-template-columns:1fr;padding:20px 16px}
+  .form-card{position:static}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">
+        <span></span><span></span>
+        <span></span><span></span>
+      </div>
+      <div class="logo-text">Calculatr<em>HUB</em></div>
+    </a>
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>
+      All calculators
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Mortgage calculator</div>
+    <h1>Mortgage repayment calculator</h1>
+    <p class="page-sub">Calculate your monthly repayments, total interest and full amortisation schedule.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- FORM -->
+  <div class="form-card">
+    <div class="form-title">Your details</div>
+
+    <div class="market-toggle">
+      <button class="active" onclick="setMarket('uk',this)">🇬🇧 United Kingdom</button>
+      <button onclick="setMarket('us',this)">🇺🇸 United States</button>
+    </div>
+
+    <div class="field">
+      <label>Property price</label>
+      <div class="input-wrap has-prefix">
+        <span class="input-prefix" id="currency-symbol">£</span>
+        <input type="number" id="price" value="400000" min="0" step="1000" placeholder="400000"/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Deposit / Down payment</label>
+      <div class="input-wrap has-prefix">
+        <span class="input-prefix" id="currency-symbol2">£</span>
+        <input type="number" id="deposit" value="80000" min="0" step="1000" placeholder="80000"/>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Term (years)</label>
+        <div class="input-wrap has-suffix">
+          <input type="number" id="term" value="25" min="1" max="40"/>
+          <span class="input-suffix">yrs</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Interest rate</label>
+        <div class="input-wrap has-suffix">
+          <input type="number" id="rate" value="4.5" min="0" max="30" step="0.1"/>
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider">Optional extras</div>
+
+    <div class="field-row">
+      <div class="field">
+        <label id="tax-label">Council tax (yr)</label>
+        <div class="input-wrap has-prefix">
+          <span class="input-prefix" id="currency-symbol3">£</span>
+          <input type="number" id="tax" value="0" min="0" step="100"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Home insurance (yr)</label>
+        <div class="input-wrap has-prefix">
+          <span class="input-prefix" id="currency-symbol4">£</span>
+          <input type="number" id="insurance" value="0" min="0" step="100"/>
+        </div>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate repayments</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="empty-state">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="8" y="8" width="32" height="32" rx="6"/>
+        <path d="M16 24h16M16 30h10M16 18h16"/>
+      </svg>
+      <p>Enter your details and hit<br/><strong>Calculate repayments</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let market = 'uk';
+let scheduleView = 'monthly';
+
+function setMarket(m, btn) {
+  market = m;
+  document.querySelectorAll('.market-toggle button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const sym = m === 'uk' ? '£' : '$';
+  ['currency-symbol','currency-symbol2','currency-symbol3','currency-symbol4'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = sym;
+  });
+  document.getElementById('tax-label').textContent = m === 'uk' ? 'Council tax (yr)' : 'Property tax (yr)';
+}
+
+function fmt(n) {
+  const sym = market === 'uk' ? '£' : '$';
+  return sym + Math.round(n).toLocaleString();
+}
+
+function fmtFull(n) {
+  const sym = market === 'uk' ? '£' : '$';
+  return sym + n.toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+function calculate() {
+  const price = parseFloat(document.getElementById('price').value)||0;
+  const deposit = parseFloat(document.getElementById('deposit').value)||0;
+  const term = parseInt(document.getElementById('term').value)||25;
+  const rate = parseFloat(document.getElementById('rate').value)||0;
+  const tax = parseFloat(document.getElementById('tax').value)||0;
+  const insurance = parseFloat(document.getElementById('insurance').value)||0;
+
+  const principal = price - deposit;
+  if(principal <= 0 || rate <= 0) return;
+
+  const monthlyRate = rate / 100 / 12;
+  const numPayments = term * 12;
+  const monthlyPayment = principal * (monthlyRate * Math.pow(1+monthlyRate, numPayments)) / (Math.pow(1+monthlyRate, numPayments) - 1);
+  const totalPaid = monthlyPayment * numPayments;
+  const totalInterest = totalPaid - principal;
+  const ltv = (principal / price) * 100;
+  const monthlyTax = tax / 12;
+  const monthlyInsurance = insurance / 12;
+  const totalMonthly = monthlyPayment + monthlyTax + monthlyInsurance;
+  const interestOnly = principal * monthlyRate;
+
+  // Build amortisation schedule
+  const schedule = [];
+  let balance = principal;
+  for(let i = 1; i <= numPayments; i++) {
+    const interestPayment = balance * monthlyRate;
+    const principalPayment = monthlyPayment - interestPayment;
+    balance -= principalPayment;
+    if(balance < 0) balance = 0;
+    schedule.push({
+      month: i,
+      year: Math.ceil(i/12),
+      interest: interestPayment,
+      principal: principalPayment,
+      balance: balance
+    });
+  }
+
+  // Yearly summary
+  const yearlyData = [];
+  for(let y = 1; y <= term; y++) {
+    const months = schedule.filter(r => r.year === y);
+    yearlyData.push({
+      year: y,
+      interest: months.reduce((s,r) => s+r.interest, 0),
+      principal: months.reduce((s,r) => s+r.principal, 0),
+      balance: months[months.length-1].balance
+    });
+  }
+
+  renderResults({
+    monthlyPayment, totalPaid, totalInterest, principal, price, deposit,
+    ltv, interestOnly, term, monthlyTax, monthlyInsurance, totalMonthly,
+    schedule, yearlyData
+  });
+}
+
+function renderResults(d) {
+  const resultsEl = document.getElementById('results');
+
+  resultsEl.innerHTML = `
+    <!-- Hero result -->
+    <div class="result-hero">
+      <div class="result-hero-label">Monthly repayment</div>
+      <div class="result-hero-amount">${fmtFull(d.monthlyPayment)}</div>
+      <div class="result-hero-sub">Interest only: ${fmtFull(d.interestOnly)}/mo</div>
+      <div class="result-hero-row">
+        <div>
+          <div class="result-mini-label">Total repaid</div>
+          <div class="result-mini-val">${fmt(d.totalPaid)}</div>
+        </div>
+        <div>
+          <div class="result-mini-label">Total interest</div>
+          <div class="result-mini-val">${fmt(d.totalInterest)}</div>
+        </div>
+        <div>
+          <div class="result-mini-label">Loan amount</div>
+          <div class="result-mini-val">${fmt(d.principal)}</div>
+        </div>
+        <div>
+          <div class="result-mini-label">LTV ratio</div>
+          <div class="result-mini-val">${d.ltv.toFixed(1)}%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cost breakdown -->
+    <div class="breakdown-card">
+      <div class="breakdown-title">Monthly breakdown</div>
+      <div class="breakdown-row"><span class="label">Mortgage repayment</span><span class="val">${fmtFull(d.monthlyPayment)}</span></div>
+      ${d.monthlyTax > 0 ? `<div class="breakdown-row"><span class="label">${market==='uk'?'Council tax':'Property tax'}</span><span class="val">${fmtFull(d.monthlyTax)}</span></div>` : ''}
+      ${d.monthlyInsurance > 0 ? `<div class="breakdown-row"><span class="label">Home insurance</span><span class="val">${fmtFull(d.monthlyInsurance)}</span></div>` : ''}
+      <div class="breakdown-row"><span class="label">Total monthly cost</span><span class="val">${fmtFull(d.totalMonthly)}</span></div>
+
+      <div class="bar-chart" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100)">
+        <div class="bar-row">
+          <span class="bar-label">Principal</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${(d.principal/d.totalPaid*100).toFixed(1)}%;background:var(--blue)"></div></div>
+          <span class="bar-val">${(d.principal/d.totalPaid*100).toFixed(1)}%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Interest</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${(d.totalInterest/d.totalPaid*100).toFixed(1)}%;background:#F87171"></div></div>
+          <span class="bar-val">${(d.totalInterest/d.totalPaid*100).toFixed(1)}%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amortisation table -->
+    <div class="table-card">
+      <div class="table-header">
+        <div class="table-title">Amortisation schedule</div>
+        <div class="table-toggle">
+          <button class="active" onclick="switchView('monthly',this)">Monthly</button>
+          <button onclick="switchView('yearly',this)">Yearly</button>
+        </div>
+      </div>
+      <div class="table-wrapper" id="table-wrapper"></div>
+    </div>
+  `;
+
+  window._scheduleData = d;
+  renderTable('monthly');
+}
+
+function switchView(view, btn) {
+  scheduleView = view;
+  document.querySelectorAll('.table-toggle button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable(view);
+}
+
+function renderTable(view) {
+  const d = window._scheduleData;
+  if(!d) return;
+  const wrapper = document.getElementById('table-wrapper');
+
+  if(view === 'yearly') {
+    wrapper.innerHTML = `
+      <table class="amort-table">
+        <thead><tr>
+          <th>Year</th><th>Interest</th><th>Principal</th><th>Remaining balance</th>
+        </tr></thead>
+        <tbody>
+          ${d.yearlyData.map(r => `
+            <tr>
+              <td>Year ${r.year}</td>
+              <td>${fmtFull(r.interest)}</td>
+              <td>${fmtFull(r.principal)}</td>
+              <td>${fmtFull(r.balance)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>`;
+  } else {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const now = new Date();
+    let mIdx = now.getMonth();
+    let yr = now.getFullYear();
+    wrapper.innerHTML = `
+      <table class="amort-table">
+        <thead><tr>
+          <th>#</th><th>Date</th><th>Interest</th><th>Principal</th><th>Balance</th>
+        </tr></thead>
+        <tbody>
+          ${d.schedule.map((r,i) => {
+            const date = `${months[mIdx]} ${yr}`;
+            mIdx++; if(mIdx>11){mIdx=0;yr++;}
+            const isYearEnd = r.month % 12 === 0;
+            return `<tr${isYearEnd?' class="year-row"':''}>
+              <td>${r.month}</td>
+              <td>${date}</td>
+              <td>${fmtFull(r.interest)}</td>
+              <td>${fmtFull(r.principal)}</td>
+              <td>${fmtFull(r.balance)}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>`;
+  }
+}
+
+// Auto calculate on load
+calculate();
+</script>
+
+</body>
+</html>
