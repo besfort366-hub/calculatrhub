@@ -1,0 +1,47 @@
+{
+  "name": "CalculatrHub — Free Calculators",
+  "short_name": "CalculatrHub",
+  "description": "Free, fast and accurate calculators for everyday life. Mortgage, age, BMI, loan, salary, tip and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Mortgage Calculator",
+      "url": "/mortgage-calculator.html",
+      "description": "Calculate mortgage repayments"
+    },
+    {
+      "name": "Age Calculator",
+      "url": "/age-calculator.html",
+      "description": "Calculate your exact age"
+    },
+    {
+      "name": "BMI Calculator",
+      "url": "/bmi-calculator.html",
+      "description": "Calculate your BMI"
+    },
+    {
+      "name": "Currency Converter",
+      "url": "/currency-converter.html",
+      "description": "Convert between currencies"
+    }
+  ]
+}

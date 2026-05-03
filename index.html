@@ -7,6 +7,12 @@
 <title>CalculatrHub — Free Property & Mortgage Calculators</title>
 <meta name="description" content="Free, fast, and accurate mortgage and property calculators. UK mortgage repayment, stamp duty, affordability, buy-to-let yield and more."/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#2563EB"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="CalculatrHub"/>
+<link rel="apple-touch-icon" href="/icons/icon-192.png"/>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
 <script>
@@ -238,5 +244,6 @@ footer a:hover{color:white}
   <a href="#">Privacy</a> · <a href="#">Terms</a> · © 2026 CalculatrHub</p>
 </footer>
 
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").then(()=>console.log("SW registered")).catch(e=>console.log("SW error",e));}</script>
 </body>
 </html>
