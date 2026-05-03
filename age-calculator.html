@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Age Calculator — CalculatrHub</title>
+<meta name="description" content="Free age calculator. Find out exactly how old you are in years, months, weeks, days, hours and minutes. Instant results, no sign-up needed."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S5RFTG7SJW');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;
+  --blue-light:#DBEAFE;
+  --blue-dark:#1E40AF;
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --gray-50:#F8F9FA;
+  --gray-100:#F1F3F5;
+  --gray-200:#E9ECEF;
+  --gray-400:#868E96;
+  --gray-600:#495057;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link:hover{color:var(--black)}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+.breadcrumb a:hover{color:var(--blue)}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px;color:var(--black)}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+
+.main{max-width:900px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start}
+
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px;color:var(--black)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.field input{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.field input:focus{border-color:var(--blue)}
+.section-divider{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400);margin:20px 0 16px;padding-top:20px;border-top:1px solid var(--gray-100)}
+.calc-btn{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;letter-spacing:-0.2px;margin-top:4px}
+.calc-btn:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.calc-btn:active{transform:translateY(0)}
+.today-btn{width:100%;padding:8px;background:var(--gray-100);color:var(--gray-600);border:none;border-radius:8px;font-family:var(--font-body);font-size:13px;cursor:pointer;margin-top:8px;transition:background 0.15s}
+.today-btn:hover{background:var(--gray-200)}
+
+/* RESULTS */
+.results{display:flex;flex-direction:column;gap:16px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-400);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;display:block;opacity:0.3}
+.empty-state p{font-size:15px}
+
+.result-hero{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px}
+.result-hero-label{font-size:12px;font-weight:500;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.result-hero-age{font-family:var(--font-display);font-size:clamp(48px,8vw,80px);font-weight:800;letter-spacing:-3px;color:var(--black);line-height:1}
+.result-hero-sub{font-size:15px;color:var(--gray-400);margin-top:8px;font-weight:300}
+
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-100)}
+.stat-box{background:var(--gray-50);border-radius:10px;padding:16px}
+.stat-box-label{font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.stat-box-val{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
+.stat-box-unit{font-size:12px;color:var(--gray-400);font-weight:300}
+
+.next-birthday-card{background:var(--blue-light);border:1px solid #BFDBFE;border-radius:var(--radius-lg);padding:24px}
+.next-birthday-label{font-size:12px;font-weight:600;color:var(--blue-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.next-birthday-days{font-family:var(--font-display);font-size:36px;font-weight:800;letter-spacing:-1px;color:var(--blue-dark)}
+.next-birthday-sub{font-size:14px;color:var(--blue-dark);opacity:0.7;margin-top:4px}
+
+.detail-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.detail-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.detail-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:14px}
+.detail-row:last-child{border-bottom:none}
+.detail-row .label{color:var(--gray-600)}
+.detail-row .val{font-weight:500;color:var(--black);font-family:var(--font-display);letter-spacing:-0.3px}
+
+@media(max-width:800px){
+  .main{grid-template-columns:1fr;padding:20px 16px}
+  .form-card{position:static}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">
+        <span></span><span></span>
+        <span></span><span></span>
+      </div>
+      <div class="logo-text">Calculatr<em>HUB</em></div>
+    </a>
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>
+      All calculators
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Age calculator</div>
+    <h1>Age calculator</h1>
+    <p class="page-sub">Find out exactly how old you are — down to the day, hour and minute.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="form-card">
+    <div class="form-title">Your details</div>
+
+    <div class="field">
+      <label>Date of birth</label>
+      <input type="date" id="dob" max=""/>
+    </div>
+
+    <div class="section-divider">Calculate age at</div>
+
+    <div class="field">
+      <label>Target date (leave as today for current age)</label>
+      <input type="date" id="target"/>
+    </div>
+    <button class="today-btn" onclick="setToday()">Reset to today</button>
+
+    <br/><br/>
+    <button class="calc-btn" onclick="calculate()">Calculate age</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="empty-state">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="24" r="18"/>
+        <path d="M24 12v12l8 4"/>
+      </svg>
+      <p>Enter your date of birth and hit<br/><strong>Calculate age</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Set default dates
+const today = new Date();
+const todayStr = today.toISOString().split('T')[0];
+document.getElementById('target').value = todayStr;
+document.getElementById('dob').max = todayStr;
+
+function setToday() {
+  document.getElementById('target').value = todayStr;
+}
+
+function calculate() {
+  const dobVal = document.getElementById('dob').value;
+  const targetVal = document.getElementById('target').value;
+
+  if (!dobVal) return;
+
+  const dob = new Date(dobVal);
+  const target = targetVal ? new Date(targetVal) : today;
+
+  if (dob > target) {
+    alert('Date of birth cannot be after target date');
+    return;
+  }
+
+  // Calculate exact age
+  let years = target.getFullYear() - dob.getFullYear();
+  let months = target.getMonth() - dob.getMonth();
+  let days = target.getDate() - dob.getDate();
+
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  // Total calculations
+  const diffMs = target - dob;
+  const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const totalWeeks = Math.floor(totalDays / 7);
+  const totalMonths = years * 12 + months;
+  const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const totalMinutes = Math.floor(diffMs / (1000 * 60));
+
+  // Next birthday
+  let nextBirthday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
+  if (nextBirthday <= target) nextBirthday.setFullYear(target.getFullYear() + 1);
+  const daysUntilBirthday = Math.ceil((nextBirthday - target) / (1000 * 60 * 60 * 24));
+  const nextBirthdayAge = nextBirthday.getFullYear() - dob.getFullYear();
+
+  // Day of week born
+  const days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const dayBorn = days_of_week[dob.getDay()];
+
+  // Zodiac sign
+  const zodiac = getZodiac(dob.getMonth() + 1, dob.getDate());
+
+  // Format next birthday
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const nextBirthdayStr = `${monthNames[nextBirthday.getMonth()]} ${nextBirthday.getDate()}, ${nextBirthday.getFullYear()}`;
+
+  renderResults({
+    years, months, days,
+    totalDays, totalWeeks, totalMonths,
+    totalHours, totalMinutes,
+    daysUntilBirthday, nextBirthdayAge, nextBirthdayStr,
+    dayBorn, zodiac, dob, target
+  });
+
+  gtag('event', 'calculate_age', { years: years });
+}
+
+function getZodiac(month, day) {
+  if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return '♈ Aries';
+  if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return '♉ Taurus';
+  if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) return '♊ Gemini';
+  if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) return '♋ Cancer';
+  if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return '♌ Leo';
+  if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) return '♍ Virgo';
+  if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) return '♎ Libra';
+  if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) return '♏ Scorpio';
+  if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) return '♐ Sagittarius';
+  if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) return '♑ Capricorn';
+  if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return '♒ Aquarius';
+  return '♓ Pisces';
+}
+
+function fmt(n) {
+  return n.toLocaleString();
+}
+
+function renderResults(d) {
+  const resultsEl = document.getElementById('results');
+  resultsEl.innerHTML = `
+    <div class="result-hero">
+      <div class="result-hero-label">Your age</div>
+      <div class="result-hero-age">${d.years}</div>
+      <div class="result-hero-sub">${d.years} years, ${d.months} months and ${d.days} days old</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-box-label">Total months</div>
+          <div class="stat-box-val">${fmt(d.totalMonths)}</div>
+          <div class="stat-box-unit">months</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-label">Total weeks</div>
+          <div class="stat-box-val">${fmt(d.totalWeeks)}</div>
+          <div class="stat-box-unit">weeks</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-label">Total days</div>
+          <div class="stat-box-val">${fmt(d.totalDays)}</div>
+          <div class="stat-box-unit">days</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-label">Total hours</div>
+          <div class="stat-box-val">${fmt(d.totalHours)}</div>
+          <div class="stat-box-unit">hours</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-birthday-card">
+      <div class="next-birthday-label">Next birthday</div>
+      <div class="next-birthday-days">${d.daysUntilBirthday} days</div>
+      <div class="next-birthday-sub">${d.nextBirthdayStr} — you'll turn ${d.nextBirthdayAge}</div>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-title">Fun facts</div>
+      <div class="detail-row"><span class="label">Day you were born</span><span class="val">${d.dayBorn}</span></div>
+      <div class="detail-row"><span class="label">Zodiac sign</span><span class="val">${d.zodiac}</span></div>
+      <div class="detail-row"><span class="label">Total minutes lived</span><span class="val">${fmt(d.totalMinutes)}</span></div>
+      <div class="detail-row"><span class="label">Total hours lived</span><span class="val">${fmt(d.totalHours)}</span></div>
+      <div class="detail-row"><span class="label">Total days lived</span><span class="val">${fmt(d.totalDays)}</span></div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
