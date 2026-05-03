@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Calorie Calculator — CalculatrHub</title>
+<meta name="description" content="Free calorie calculator. Find out how many calories you need per day based on your age, weight, height, sex and activity level. Instant results."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S5RFTG7SJW');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;
+  --blue-light:#DBEAFE;
+  --blue-dark:#1E40AF;
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --gray-50:#F8F9FA;
+  --gray-100:#F1F3F5;
+  --gray-200:#E9ECEF;
+  --gray-400:#868E96;
+  --gray-600:#495057;
+  --orange:#EA580C;
+  --orange-light:#FFF7ED;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link:hover{color:var(--black)}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+.breadcrumb a:hover{color:var(--blue)}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px;color:var(--black)}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+
+.main{max-width:1000px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:400px 1fr;gap:24px;align-items:start}
+
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px;color:var(--black)}
+
+.toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-100);border-radius:8px;padding:3px;margin-bottom:20px}
+.toggle button{border:none;background:none;padding:8px;font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--gray-400);border-radius:6px;cursor:pointer;transition:all 0.15s}
+.toggle button.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-wrap input,.input-wrap select{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s;appearance:none}
+.input-wrap input:focus,.input-wrap select:focus{border-color:var(--blue)}
+.input-suffix{position:absolute;right:12px;font-size:13px;color:var(--gray-400);pointer-events:none}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.section-divider{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400);margin:16px 0 12px;padding-top:16px;border-top:1px solid var(--gray-100)}
+.calc-btn{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;letter-spacing:-0.2px;margin-top:8px}
+.calc-btn:hover{background:var(--blue-dark);transform:translateY(-1px)}
+
+/* RESULTS */
+.results{display:flex;flex-direction:column;gap:16px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-400);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;display:block;opacity:0.3}
+
+.result-hero{background:var(--orange-light);border:1px solid #FED7AA;border-radius:var(--radius-lg);padding:28px}
+.result-hero-label{font-size:12px;font-weight:500;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.result-hero-cal{font-family:var(--font-display);font-size:clamp(52px,8vw,80px);font-weight:800;letter-spacing:-3px;color:var(--orange);line-height:1}
+.result-hero-sub{font-size:14px;color:var(--orange);opacity:0.8;margin-top:6px;font-weight:300}
+
+.goals-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.goals-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.goal-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:10px;margin-bottom:8px;border:1px solid var(--gray-200)}
+.goal-row:last-child{margin-bottom:0}
+.goal-row.maintain{background:#EFF6FF;border-color:#BFDBFE}
+.goal-left{display:flex;flex-direction:column}
+.goal-name{font-size:14px;font-weight:500;color:var(--black)}
+.goal-desc{font-size:12px;color:var(--gray-400);margin-top:2px}
+.goal-cal{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
+
+.macros-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.macros-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.macro-row{margin-bottom:14px}
+.macro-header{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.macro-name{font-weight:500;color:var(--black)}
+.macro-val{color:var(--gray-600)}
+.macro-bar-track{height:8px;background:var(--gray-100);border-radius:100px;overflow:hidden}
+.macro-bar-fill{height:100%;border-radius:100px}
+
+@media(max-width:860px){
+  .main{grid-template-columns:1fr;padding:20px 16px}
+  .form-card{position:static}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">
+        <span></span><span></span>
+        <span></span><span></span>
+      </div>
+      <div class="logo-text">Calculatr<em>HUB</em></div>
+    </a>
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>
+      All calculators
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Calorie calculator</div>
+    <h1>Calorie calculator</h1>
+    <p class="page-sub">Find out how many calories you need per day based on your details and activity level.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="form-card">
+    <div class="form-title">Your details</div>
+
+    <div class="toggle">
+      <button class="active" id="btn-metric" onclick="setUnit('metric')">Metric</button>
+      <button id="btn-imperial" onclick="setUnit('imperial')">Imperial</button>
+    </div>
+
+    <div class="field">
+      <label>Sex</label>
+      <div class="toggle" style="margin-bottom:0">
+        <button class="active" id="btn-male" onclick="setSex('male')">Male</button>
+        <button id="btn-female" onclick="setSex('female')">Female</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Age</label>
+      <div class="input-wrap">
+        <input type="number" id="age" placeholder="30" min="15" max="100"/>
+        <span class="input-suffix">yrs</span>
+      </div>
+    </div>
+
+    <div id="metric-fields">
+      <div class="field">
+        <label>Height</label>
+        <div class="input-wrap">
+          <input type="number" id="height-cm" placeholder="175" min="100" max="250"/>
+          <span class="input-suffix">cm</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Weight</label>
+        <div class="input-wrap">
+          <input type="number" id="weight-kg" placeholder="70" min="30" max="300"/>
+          <span class="input-suffix">kg</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="imperial-fields" style="display:none">
+      <div class="field">
+        <label>Height</label>
+        <div class="field-row">
+          <div class="input-wrap">
+            <input type="number" id="height-ft" placeholder="5" min="3" max="8"/>
+            <span class="input-suffix">ft</span>
+          </div>
+          <div class="input-wrap">
+            <input type="number" id="height-in" placeholder="9" min="0" max="11"/>
+            <span class="input-suffix">in</span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Weight</label>
+        <div class="input-wrap">
+          <input type="number" id="weight-lb" placeholder="154" min="66" max="660"/>
+          <span class="input-suffix">lbs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider">Activity level</div>
+
+    <div class="field">
+      <div class="input-wrap">
+        <select id="activity">
+          <option value="1.2">Sedentary (little or no exercise)</option>
+          <option value="1.375">Lightly active (1–3 days/week)</option>
+          <option value="1.55" selected>Moderately active (3–5 days/week)</option>
+          <option value="1.725">Very active (6–7 days/week)</option>
+          <option value="1.9">Extra active (physical job or 2x training)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate calories</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="empty-state">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M24 6c-6 0-10 6-10 12 0 8 10 24 10 24s10-16 10-24c0-6-4-12-10-12z"/>
+        <circle cx="24" cy="18" r="3"/>
+      </svg>
+      <p>Enter your details and hit<br/><strong>Calculate calories</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let unit = 'metric';
+let sex = 'male';
+
+function setUnit(u) {
+  unit = u;
+  document.getElementById('metric-fields').style.display = u === 'metric' ? 'block' : 'none';
+  document.getElementById('imperial-fields').style.display = u === 'imperial' ? 'block' : 'none';
+  document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+  document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+}
+
+function setSex(s) {
+  sex = s;
+  document.getElementById('btn-male').classList.toggle('active', s === 'male');
+  document.getElementById('btn-female').classList.toggle('active', s === 'female');
+}
+
+function calculate() {
+  const age = parseFloat(document.getElementById('age').value);
+  const activity = parseFloat(document.getElementById('activity').value);
+  if (!age) return;
+
+  let heightCm, weightKg;
+  if (unit === 'metric') {
+    heightCm = parseFloat(document.getElementById('height-cm').value);
+    weightKg = parseFloat(document.getElementById('weight-kg').value);
+  } else {
+    const ft = parseFloat(document.getElementById('height-ft').value) || 0;
+    const inches = parseFloat(document.getElementById('height-in').value) || 0;
+    heightCm = ((ft * 12) + inches) * 2.54;
+    weightKg = parseFloat(document.getElementById('weight-lb').value) * 0.453592;
+  }
+
+  if (!heightCm || !weightKg) return;
+
+  // Mifflin-St Jeor formula
+  let bmr;
+  if (sex === 'male') {
+    bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+  } else {
+    bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+  }
+
+  const tdee = Math.round(bmr * activity);
+
+  // Goals
+  const goals = [
+    { name: 'Extreme weight loss', desc: '-2 lbs / week', cal: tdee - 1000, color: '#EF4444', bg: '#FEF2F2', border: '#FECACA' },
+    { name: 'Weight loss', desc: '-1 lb / week', cal: tdee - 500, color: '#F97316', bg: '#FFF7ED', border: '#FED7AA' },
+    { name: 'Mild weight loss', desc: '-0.5 lbs / week', cal: tdee - 250, color: '#EAB308', bg: '#FEFCE8', border: '#FEF08A' },
+    { name: 'Maintain weight', desc: 'Stay the same', cal: tdee, color: '#2563EB', bg: '#EFF6FF', border: '#BFDBFE', maintain: true },
+    { name: 'Mild weight gain', desc: '+0.5 lbs / week', cal: tdee + 250, color: '#16A34A', bg: '#F0FDF4', border: '#BBF7D0' },
+    { name: 'Weight gain', desc: '+1 lb / week', cal: tdee + 500, color: '#059669', bg: '#ECFDF5', border: '#A7F3D0' },
+  ];
+
+  // Macros for maintenance (40/30/30 carbs/protein/fat)
+  const protein = Math.round((tdee * 0.30) / 4);
+  const carbs = Math.round((tdee * 0.40) / 4);
+  const fat = Math.round((tdee * 0.30) / 9);
+
+  renderResults({ tdee, goals, protein, carbs, fat, bmr: Math.round(bmr) });
+  gtag('event', 'calculate_calories', { tdee, sex, activity });
+}
+
+function renderResults({ tdee, goals, protein, carbs, fat, bmr }) {
+  document.getElementById('results').innerHTML = `
+    <div class="result-hero">
+      <div class="result-hero-label">Daily calories to maintain weight</div>
+      <div class="result-hero-cal">${tdee.toLocaleString()}</div>
+      <div class="result-hero-sub">calories/day · BMR: ${bmr.toLocaleString()} kcal</div>
+    </div>
+
+    <div class="goals-card">
+      <div class="goals-title">Calorie goals by target</div>
+      ${goals.map(g => `
+        <div class="goal-row${g.maintain ? ' maintain' : ''}" style="background:${g.bg};border-color:${g.border}">
+          <div class="goal-left">
+            <span class="goal-name" style="color:${g.color}">${g.name}</span>
+            <span class="goal-desc">${g.desc}</span>
+          </div>
+          <span class="goal-cal" style="color:${g.color}">${g.cal.toLocaleString()}</span>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="macros-card">
+      <div class="macros-title">Suggested daily macros (maintenance)</div>
+      <div class="macro-row">
+        <div class="macro-header">
+          <span class="macro-name">Carbohydrates</span>
+          <span class="macro-val">${carbs}g · ${Math.round(tdee * 0.40)} kcal · 40%</span>
+        </div>
+        <div class="macro-bar-track"><div class="macro-bar-fill" style="width:40%;background:#3B82F6"></div></div>
+      </div>
+      <div class="macro-row">
+        <div class="macro-header">
+          <span class="macro-name">Protein</span>
+          <span class="macro-val">${protein}g · ${Math.round(tdee * 0.30)} kcal · 30%</span>
+        </div>
+        <div class="macro-bar-track"><div class="macro-bar-fill" style="width:30%;background:#22C55E"></div></div>
+      </div>
+      <div class="macro-row">
+        <div class="macro-header">
+          <span class="macro-name">Fat</span>
+          <span class="macro-val">${fat}g · ${Math.round(tdee * 0.30)} kcal · 30%</span>
+        </div>
+        <div class="macro-bar-track"><div class="macro-bar-fill" style="width:30%;background:#F97316"></div></div>
+      </div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
