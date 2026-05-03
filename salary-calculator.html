@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Salary & Tax Calculator — CalculatrHub</title>
+<meta name="description" content="Free salary and tax calculator. Calculate your take-home pay after income tax and National Insurance. UK and US supported. Instant results."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563EB;--blue-light:#DBEAFE;--blue-dark:#1E40AF;--black:#0A0A0A;--white:#FFFFFF;--gray-50:#F8F9FA;--gray-100:#F1F3F5;--gray-200:#E9ECEF;--gray-400:#868E96;--gray-600:#495057;--green:#059669;--green-light:#D1FAE5;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius-lg:20px;}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+.main{max-width:1000px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:start}
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px}
+.toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-100);border-radius:8px;padding:3px;margin-bottom:20px}
+.toggle button{border:none;background:none;padding:8px;font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--gray-400);border-radius:6px;cursor:pointer;transition:all 0.15s}
+.toggle button.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-prefix{position:absolute;left:12px;font-size:14px;color:var(--gray-400);pointer-events:none}
+.input-wrap input,.input-wrap select{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.input-wrap input:focus{border-color:var(--blue)}
+.has-prefix input{padding-left:28px}
+.calc-btn{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;margin-top:8px}
+.calc-btn:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.results{display:flex;flex-direction:column;gap:16px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-400);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;display:block;opacity:0.3}
+.result-hero{background:var(--green-light);border:1px solid #A7F3D0;border-radius:var(--radius-lg);padding:28px}
+.result-hero-label{font-size:12px;font-weight:500;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.result-hero-amount{font-family:var(--font-body);font-size:clamp(36px,5vw,56px);font-weight:500;letter-spacing:-2px;color:#065F46;line-height:1}
+.result-hero-sub{font-size:14px;color:#065F46;opacity:0.7;margin-top:6px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid #A7F3D0}
+.result-mini-label{font-size:11px;color:#065F46;opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.result-mini-val{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;color:#065F46}
+.breakdown-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.breakdown-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--gray-100);font-size:14px}
+.breakdown-row:last-child{border-bottom:none;font-weight:600;padding-top:16px}
+.breakdown-row .label{color:var(--gray-600)}
+.breakdown-row .val{font-weight:500;color:var(--black)}
+.breakdown-row .val.deduction{color:#DC2626}
+.breakdown-row .val.takehome{color:var(--green);font-size:16px}
+@media(max-width:860px){.main{grid-template-columns:1fr;padding:20px 16px}.form-card{position:static}.result-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-mark"><span></span><span></span><span></span><span></span></div><div class="logo-text">Calculatr<em>HUB</em></div></a>
+    <a href="/" class="back-link"><svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>All calculators</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Salary & tax calculator</div>
+    <h1>Salary & tax calculator</h1>
+    <p class="page-sub">Calculate your take-home pay after income tax and deductions.</p>
+  </div>
+</div>
+<div class="main">
+  <div class="form-card">
+    <div class="form-title">Your salary</div>
+    <div class="toggle">
+      <button class="active" id="btn-uk" onclick="setCountry('uk')">🇬🇧 UK</button>
+      <button id="btn-us" onclick="setCountry('us')">🇺🇸 US</button>
+    </div>
+    <div class="field">
+      <label>Annual gross salary</label>
+      <div class="input-wrap has-prefix">
+        <span class="input-prefix" id="sym">£</span>
+        <input type="number" id="salary" value="35000" min="0" step="1000"/>
+      </div>
+    </div>
+    <div class="field" id="uk-student-field">
+      <label>Student loan plan</label>
+      <div class="input-wrap">
+        <select id="student-loan">
+          <option value="none">No student loan</option>
+          <option value="plan1">Plan 1</option>
+          <option value="plan2">Plan 2</option>
+          <option value="plan4">Plan 4 (Scotland)</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" id="us-state-field" style="display:none">
+      <label>Filing status</label>
+      <div class="input-wrap">
+        <select id="filing-status">
+          <option value="single">Single</option>
+          <option value="married">Married filing jointly</option>
+          <option value="head">Head of household</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate take-home pay</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="empty-state">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="8" y="8" width="32" height="32" rx="4"/>
+        <path d="M16 24h16M16 30h10M24 8v8"/>
+      </svg>
+      <p>Enter your salary and hit<br/><strong>Calculate take-home pay</strong></p>
+    </div>
+  </div>
+</div>
+
+<script>
+let country = 'uk';
+
+function setCountry(c) {
+  country = c;
+  document.getElementById('btn-uk').classList.toggle('active', c === 'uk');
+  document.getElementById('btn-us').classList.toggle('active', c === 'us');
+  document.getElementById('sym').textContent = c === 'uk' ? '£' : '$';
+  document.getElementById('uk-student-field').style.display = c === 'uk' ? 'block' : 'none';
+  document.getElementById('us-state-field').style.display = c === 'us' ? 'block' : 'none';
+}
+
+function fmt(n) {
+  const s = country === 'uk' ? '£' : '$';
+  return s + Math.round(n).toLocaleString();
+}
+
+function calculate() {
+  const gross = parseFloat(document.getElementById('salary').value) || 0;
+  if (!gross) return;
+
+  let incomeTax = 0, ni = 0, studentLoan = 0, stateTax = 0, ficaSS = 0, ficaMed = 0;
+
+  if (country === 'uk') {
+    // UK 2024/25 tax bands
+    const personalAllowance = gross > 125140 ? 0 : gross > 100000 ? 12570 - ((gross - 100000) / 2) : 12570;
+    const taxable = Math.max(0, gross - personalAllowance);
+    if (taxable > 0) {
+      const basic = Math.min(taxable, 37700);
+      incomeTax += basic * 0.20;
+      if (taxable > 37700) {
+        const higher = Math.min(taxable - 37700, 125140 - 37700);
+        incomeTax += higher * 0.40;
+      }
+      if (taxable > 125140) incomeTax += (taxable - 125140) * 0.45;
+    }
+    // NI 2024/25
+    const niThreshold = 12570;
+    const niUpper = 50270;
+    if (gross > niThreshold) {
+      ni += Math.min(gross - niThreshold, niUpper - niThreshold) * 0.08;
+      if (gross > niUpper) ni += (gross - niUpper) * 0.02;
+    }
+    // Student loan
+    const plan = document.getElementById('student-loan').value;
+    if (plan === 'plan1' && gross > 24990) studentLoan = (gross - 24990) * 0.09;
+    if (plan === 'plan2' && gross > 27295) studentLoan = (gross - 27295) * 0.09;
+    if (plan === 'plan4' && gross > 31395) studentLoan = (gross - 31395) * 0.09;
+
+    const totalDeductions = incomeTax + ni + studentLoan;
+    const takeHome = gross - totalDeductions;
+    renderUK({ gross, incomeTax, ni, studentLoan, totalDeductions, takeHome });
+
+  } else {
+    // US Federal 2024 (single)
+    const standardDeduction = 14600;
+    const taxableIncome = Math.max(0, gross - standardDeduction);
+    const brackets = [[11600,0.10],[47150,0.12],[100525,0.22],[191950,0.24],[243725,0.32],[609350,0.35],[Infinity,0.37]];
+    let prev = 0;
+    for (const [limit, rate] of brackets) {
+      if (taxableIncome > prev) {
+        incomeTax += (Math.min(taxableIncome, limit) - prev) * rate;
+        prev = limit;
+      }
+    }
+    ficaSS = Math.min(gross, 168600) * 0.062;
+    ficaMed = gross * 0.0145;
+    const totalDeductions = incomeTax + ficaSS + ficaMed;
+    const takeHome = gross - totalDeductions;
+    renderUS({ gross, incomeTax, ficaSS, ficaMed, totalDeductions, takeHome });
+  }
+
+  gtag('event', 'calculate_salary', { country, gross });
+}
+
+function renderUK({ gross, incomeTax, ni, studentLoan, totalDeductions, takeHome }) {
+  document.getElementById('results').innerHTML = `
+    <div class="result-hero">
+      <div class="result-hero-label">Annual take-home pay</div>
+      <div class="result-hero-amount">${fmt(takeHome)}</div>
+      <div class="result-hero-sub">After tax and National Insurance</div>
+      <div class="result-grid">
+        <div><div class="result-mini-label">Monthly</div><div class="result-mini-val">${fmt(takeHome/12)}</div></div>
+        <div><div class="result-mini-label">Weekly</div><div class="result-mini-val">${fmt(takeHome/52)}</div></div>
+        <div><div class="result-mini-label">Daily</div><div class="result-mini-val">${fmt(takeHome/260)}</div></div>
+      </div>
+    </div>
+    <div class="breakdown-card">
+      <div class="breakdown-title">Tax breakdown</div>
+      <div class="breakdown-row"><span class="label">Gross salary</span><span class="val">${fmt(gross)}</span></div>
+      <div class="breakdown-row"><span class="label">Income tax</span><span class="val deduction">−${fmt(incomeTax)}</span></div>
+      <div class="breakdown-row"><span class="label">National Insurance</span><span class="val deduction">−${fmt(ni)}</span></div>
+      ${studentLoan > 0 ? `<div class="breakdown-row"><span class="label">Student loan</span><span class="val deduction">−${fmt(studentLoan)}</span></div>` : ''}
+      <div class="breakdown-row"><span class="label">Total deductions</span><span class="val deduction">−${fmt(totalDeductions)}</span></div>
+      <div class="breakdown-row"><span class="label">Take-home pay</span><span class="val takehome">${fmt(takeHome)}</span></div>
+    </div>
+  `;
+}
+
+function renderUS({ gross, incomeTax, ficaSS, ficaMed, totalDeductions, takeHome }) {
+  document.getElementById('results').innerHTML = `
+    <div class="result-hero">
+      <div class="result-hero-label">Annual take-home pay (federal)</div>
+      <div class="result-hero-amount">${fmt(takeHome)}</div>
+      <div class="result-hero-sub">After federal income tax and FICA</div>
+      <div class="result-grid">
+        <div><div class="result-mini-label">Monthly</div><div class="result-mini-val">${fmt(takeHome/12)}</div></div>
+        <div><div class="result-mini-label">Weekly</div><div class="result-mini-val">${fmt(takeHome/52)}</div></div>
+        <div><div class="result-mini-label">Daily</div><div class="result-mini-val">${fmt(takeHome/260)}</div></div>
+      </div>
+    </div>
+    <div class="breakdown-card">
+      <div class="breakdown-title">Tax breakdown (federal only)</div>
+      <div class="breakdown-row"><span class="label">Gross salary</span><span class="val">${fmt(gross)}</span></div>
+      <div class="breakdown-row"><span class="label">Federal income tax</span><span class="val deduction">−${fmt(incomeTax)}</span></div>
+      <div class="breakdown-row"><span class="label">Social Security (6.2%)</span><span class="val deduction">−${fmt(ficaSS)}</span></div>
+      <div class="breakdown-row"><span class="label">Medicare (1.45%)</span><span class="val deduction">−${fmt(ficaMed)}</span></div>
+      <div class="breakdown-row"><span class="label">Total deductions</span><span class="val deduction">−${fmt(totalDeductions)}</span></div>
+      <div class="breakdown-row"><span class="label">Take-home pay</span><span class="val takehome">${fmt(takeHome)}</span></div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
