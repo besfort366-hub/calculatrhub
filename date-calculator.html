@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Date Calculator — CalculatrHub</title>
+<meta name="description" content="Free date calculator. Calculate the difference between two dates, or add and subtract days, weeks, months and years from any date. Instant results."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563EB;--blue-light:#DBEAFE;--blue-dark:#1E40AF;--black:#0A0A0A;--white:#FFFFFF;--gray-50:#F8F9FA;--gray-100:#F1F3F5;--gray-200:#E9ECEF;--gray-400:#868E96;--gray-600:#495057;--purple:#7C3AED;--purple-light:#EDE9FE;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius-lg:20px;}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+.main{max-width:900px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start}
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px}
+.toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-100);border-radius:8px;padding:3px;margin-bottom:20px}
+.toggle button{border:none;background:none;padding:8px;font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--gray-400);border-radius:6px;cursor:pointer;transition:all 0.15s}
+.toggle button.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.field input,.field select{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.field input:focus,.field select:focus{border-color:var(--blue)}
+.field-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.input-group{display:flex;gap:8px}
+.input-group .field{flex:1}
+.section-divider{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400);margin:16px 0 12px;padding-top:16px;border-top:1px solid var(--gray-100)}
+.calc-btn{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;margin-top:4px}
+.calc-btn:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.results{display:flex;flex-direction:column;gap:16px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-400);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;display:block;opacity:0.3}
+.result-hero{background:var(--purple-light);border:1px solid #C4B5FD;border-radius:var(--radius-lg);padding:28px}
+.result-hero-label{font-size:12px;font-weight:500;color:var(--purple);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.result-hero-main{font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:800;letter-spacing:-2px;color:var(--purple);line-height:1.1}
+.result-hero-sub{font-size:14px;color:var(--purple);opacity:0.7;margin-top:8px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid #C4B5FD}
+.stat-box{background:white;border-radius:10px;padding:14px}
+.stat-label{font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.stat-val{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
+.result-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.result-card-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:12px}
+.result-date{font-family:var(--font-display);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--black)}
+.result-date-sub{font-size:14px;color:var(--gray-400);margin-top:4px}
+@media(max-width:800px){.main{grid-template-columns:1fr;padding:20px 16px}.form-card{position:static}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-mark"><span></span><span></span><span></span><span></span></div><div class="logo-text">Calculatr<em>HUB</em></div></a>
+    <a href="/" class="back-link"><svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>All calculators</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Date calculator</div>
+    <h1>Date calculator</h1>
+    <p class="page-sub">Calculate the difference between two dates, or add and subtract time from any date.</p>
+  </div>
+</div>
+<div class="main">
+  <div class="form-card">
+    <div class="toggle">
+      <button class="active" id="btn-diff" onclick="setMode('diff')">Date difference</button>
+      <button id="btn-add" onclick="setMode('add')">Add / subtract</button>
+    </div>
+
+    <div id="diff-mode">
+      <div class="form-title">Between two dates</div>
+      <div class="field"><label>Start date</label><input type="date" id="date1"/></div>
+      <div class="field"><label>End date</label><input type="date" id="date2"/></div>
+    </div>
+
+    <div id="add-mode" style="display:none">
+      <div class="form-title">Add or subtract from a date</div>
+      <div class="field"><label>Start date</label><input type="date" id="date-start"/></div>
+      <div class="section-divider">Add or subtract</div>
+      <div class="field-row">
+        <div class="field"><label>Years</label><input type="number" id="add-years" value="0"/></div>
+        <div class="field"><label>Months</label><input type="number" id="add-months" value="0"/></div>
+        <div class="field"><label>Days</label><input type="number" id="add-days" value="0"/></div>
+      </div>
+      <div class="toggle" style="margin-top:12px">
+        <button class="active" id="btn-plus" onclick="setOp('add')">Add +</button>
+        <button id="btn-minus" onclick="setOp('subtract')">Subtract −</button>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="empty-state">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="10" width="36" height="32" rx="4"/>
+        <path d="M6 20h36M16 6v8M32 6v8"/>
+      </svg>
+      <p>Select dates and hit<br/><strong>Calculate</strong></p>
+    </div>
+  </div>
+</div>
+
+<script>
+let mode = 'diff';
+let op = 'add';
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('date1').value = today;
+document.getElementById('date2').value = today;
+document.getElementById('date-start').value = today;
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('diff-mode').style.display = m === 'diff' ? 'block' : 'none';
+  document.getElementById('add-mode').style.display = m === 'add' ? 'block' : 'none';
+  document.getElementById('btn-diff').classList.toggle('active', m === 'diff');
+  document.getElementById('btn-add').classList.toggle('active', m === 'add');
+}
+
+function setOp(o) {
+  op = o;
+  document.getElementById('btn-plus').classList.toggle('active', o === 'add');
+  document.getElementById('btn-minus').classList.toggle('active', o === 'subtract');
+}
+
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+function fmtDate(d) {
+  return `${dayNames[d.getDay()]}, ${monthNames[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+function calculate() {
+  if (mode === 'diff') {
+    const d1 = new Date(document.getElementById('date1').value);
+    const d2 = new Date(document.getElementById('date2').value);
+    if (isNaN(d1) || isNaN(d2)) return;
+    const start = d1 < d2 ? d1 : d2;
+    const end = d1 < d2 ? d2 : d1;
+    const diffMs = end - start;
+    const totalDays = Math.round(diffMs / 86400000);
+    const totalWeeks = Math.floor(totalDays / 7);
+    const remDays = totalDays % 7;
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+    let days = end.getDate() - start.getDate();
+    if (days < 0) { months--; const prev = new Date(end.getFullYear(), end.getMonth(), 0); days += prev.getDate(); }
+    if (months < 0) { years--; months += 12; }
+    renderDiff({ years, months, days, totalDays, totalWeeks, remDays, start, end });
+  } else {
+    const start = new Date(document.getElementById('date-start').value);
+    if (isNaN(start)) return;
+    const y = parseInt(document.getElementById('add-years').value) || 0;
+    const m = parseInt(document.getElementById('add-months').value) || 0;
+    const d = parseInt(document.getElementById('add-days').value) || 0;
+    const mult = op === 'add' ? 1 : -1;
+    const result = new Date(start);
+    result.setFullYear(result.getFullYear() + y * mult);
+    result.setMonth(result.getMonth() + m * mult);
+    result.setDate(result.getDate() + d * mult);
+    renderAdd({ start, result, y, m, d });
+  }
+  gtag('event', 'calculate_date', { mode });
+}
+
+function renderDiff({ years, months, days, totalDays, totalWeeks, remDays, start, end }) {
+  const parts = [];
+  if (years > 0) parts.push(`${years} year${years !== 1 ? 's' : ''}`);
+  if (months > 0) parts.push(`${months} month${months !== 1 ? 's' : ''}`);
+  if (days > 0) parts.push(`${days} day${days !== 1 ? 's' : ''}`);
+  const mainText = parts.length > 0 ? parts.join(', ') : '0 days';
+
+  document.getElementById('results').innerHTML = `
+    <div class="result-hero">
+      <div class="result-hero-label">Date difference</div>
+      <div class="result-hero-main">${mainText}</div>
+      <div class="result-hero-sub">${fmtDate(start)} → ${fmtDate(end)}</div>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-label">Total days</div><div class="stat-val">${totalDays.toLocaleString()}</div></div>
+        <div class="stat-box"><div class="stat-label">Total weeks</div><div class="stat-val">${totalWeeks.toLocaleString()}${remDays > 0 ? ` + ${remDays}d` : ''}</div></div>
+        <div class="stat-box"><div class="stat-label">Months</div><div class="stat-val">${(years*12+months).toLocaleString()}</div></div>
+        <div class="stat-box"><div class="stat-label">Years</div><div class="stat-val">${years > 0 ? years : '< 1'}</div></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAdd({ start, result, y, m, d }) {
+  const action = op === 'add' ? 'Added' : 'Subtracted';
+  const parts = [];
+  if (y > 0) parts.push(`${y} year${y !== 1 ? 's' : ''}`);
+  if (m > 0) parts.push(`${m} month${m !== 1 ? 's' : ''}`);
+  if (d > 0) parts.push(`${d} day${d !== 1 ? 's' : ''}`);
+
+  document.getElementById('results').innerHTML = `
+    <div class="result-hero">
+      <div class="result-hero-label">Result date</div>
+      <div class="result-hero-main">${monthNames[result.getMonth()]} ${result.getDate()}, ${result.getFullYear()}</div>
+      <div class="result-hero-sub">${dayNames[result.getDay()]}</div>
+    </div>
+    <div class="result-card">
+      <div class="result-card-title">Calculation</div>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.8">
+        Start date: <strong>${fmtDate(start)}</strong><br/>
+        ${action}: <strong>${parts.length > 0 ? parts.join(', ') : 'nothing'}</strong><br/>
+        Result: <strong>${fmtDate(result)}</strong>
+      </p>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>

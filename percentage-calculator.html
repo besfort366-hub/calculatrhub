@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Percentage Calculator — CalculatrHub</title>
+<meta name="description" content="Free percentage calculator. Calculate percentages, percentage change, and what percentage one number is of another. Instant results."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563EB;--blue-light:#DBEAFE;--blue-dark:#1E40AF;--black:#0A0A0A;--white:#FFFFFF;--gray-50:#F8F9FA;--gray-100:#F1F3F5;--gray-200:#E9ECEF;--gray-400:#868E96;--gray-600:#495057;--teal:#0D9488;--teal-light:#CCFBF1;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius-lg:20px;}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+.main{max-width:900px;margin:0 auto;padding:32px 24px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.calc-block{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.calc-block-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:4px}
+.calc-block-desc{font-size:13px;color:var(--gray-400);margin-bottom:16px}
+.formula{font-size:13px;color:var(--blue);background:var(--blue-light);padding:6px 10px;border-radius:6px;margin-bottom:16px;font-weight:500}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:500;color:var(--gray-600);margin-bottom:4px}
+.input-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.input-row span{font-size:14px;color:var(--gray-400);white-space:nowrap}
+.input-row input{flex:1;min-width:80px;padding:9px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.input-row input:focus{border-color:var(--blue)}
+.calc-btn{width:100%;padding:12px;background:var(--blue);color:white;border:none;border-radius:8px;font-family:var(--font-display);font-size:14px;font-weight:600;cursor:pointer;margin-top:12px;transition:background 0.15s}
+.calc-btn:hover{background:var(--blue-dark)}
+.result-box{margin-top:12px;padding:16px;background:var(--teal-light);border:1px solid #99F6E4;border-radius:10px;display:none}
+.result-box.show{display:block}
+.result-label{font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:600}
+.result-value{font-family:var(--font-display);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--teal)}
+.result-sub{font-size:13px;color:var(--teal);opacity:0.8;margin-top:2px}
+@media(max-width:700px){.calc-grid{grid-template-columns:1fr}.main{padding:20px 16px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-mark"><span></span><span></span><span></span><span></span></div><div class="logo-text">Calculatr<em>HUB</em></div></a>
+    <a href="/" class="back-link"><svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>All calculators</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Percentage calculator</div>
+    <h1>Percentage calculator</h1>
+    <p class="page-sub">Work out percentages instantly — six different calculations covered.</p>
+  </div>
+</div>
+<div class="main">
+  <div class="calc-grid">
+
+    <!-- 1. What is X% of Y -->
+    <div class="calc-block">
+      <div class="calc-block-title">What is X% of Y?</div>
+      <div class="calc-block-desc">e.g. What is 20% of 150?</div>
+      <div class="formula">X% × Y = ?</div>
+      <div class="input-row">
+        <span>What is</span>
+        <input type="number" id="c1-pct" placeholder="20"/>
+        <span>% of</span>
+        <input type="number" id="c1-num" placeholder="150"/>
+        <span>?</span>
+      </div>
+      <button class="calc-btn" onclick="calc1()">Calculate</button>
+      <div class="result-box" id="r1">
+        <div class="result-label">Answer</div>
+        <div class="result-value" id="r1-val"></div>
+        <div class="result-sub" id="r1-sub"></div>
+      </div>
+    </div>
+
+    <!-- 2. X is what % of Y -->
+    <div class="calc-block">
+      <div class="calc-block-title">X is what % of Y?</div>
+      <div class="calc-block-desc">e.g. 30 is what % of 150?</div>
+      <div class="formula">X ÷ Y × 100 = ?%</div>
+      <div class="input-row">
+        <input type="number" id="c2-x" placeholder="30"/>
+        <span>is what % of</span>
+        <input type="number" id="c2-y" placeholder="150"/>
+        <span>?</span>
+      </div>
+      <button class="calc-btn" onclick="calc2()">Calculate</button>
+      <div class="result-box" id="r2">
+        <div class="result-label">Answer</div>
+        <div class="result-value" id="r2-val"></div>
+        <div class="result-sub" id="r2-sub"></div>
+      </div>
+    </div>
+
+    <!-- 3. Percentage change -->
+    <div class="calc-block">
+      <div class="calc-block-title">Percentage change</div>
+      <div class="calc-block-desc">e.g. From 80 to 100 is what % increase?</div>
+      <div class="formula">(New − Old) ÷ Old × 100</div>
+      <div class="input-row">
+        <span>From</span>
+        <input type="number" id="c3-old" placeholder="80"/>
+        <span>to</span>
+        <input type="number" id="c3-new" placeholder="100"/>
+      </div>
+      <button class="calc-btn" onclick="calc3()">Calculate</button>
+      <div class="result-box" id="r3">
+        <div class="result-label">Change</div>
+        <div class="result-value" id="r3-val"></div>
+        <div class="result-sub" id="r3-sub"></div>
+      </div>
+    </div>
+
+    <!-- 4. Add percentage to number -->
+    <div class="calc-block">
+      <div class="calc-block-title">Add a percentage</div>
+      <div class="calc-block-desc">e.g. 200 + 15% = ?</div>
+      <div class="formula">Number × (1 + %/100)</div>
+      <div class="input-row">
+        <input type="number" id="c4-num" placeholder="200"/>
+        <span>+</span>
+        <input type="number" id="c4-pct" placeholder="15"/>
+        <span>%</span>
+      </div>
+      <button class="calc-btn" onclick="calc4()">Calculate</button>
+      <div class="result-box" id="r4">
+        <div class="result-label">Result</div>
+        <div class="result-value" id="r4-val"></div>
+        <div class="result-sub" id="r4-sub"></div>
+      </div>
+    </div>
+
+    <!-- 5. Subtract percentage -->
+    <div class="calc-block">
+      <div class="calc-block-title">Subtract a percentage</div>
+      <div class="calc-block-desc">e.g. 200 − 15% = ?</div>
+      <div class="formula">Number × (1 − %/100)</div>
+      <div class="input-row">
+        <input type="number" id="c5-num" placeholder="200"/>
+        <span>−</span>
+        <input type="number" id="c5-pct" placeholder="15"/>
+        <span>%</span>
+      </div>
+      <button class="calc-btn" onclick="calc5()">Calculate</button>
+      <div class="result-box" id="r5">
+        <div class="result-label">Result</div>
+        <div class="result-value" id="r5-val"></div>
+        <div class="result-sub" id="r5-sub"></div>
+      </div>
+    </div>
+
+    <!-- 6. What % is X of total -->
+    <div class="calc-block">
+      <div class="calc-block-title">Percentage of total</div>
+      <div class="calc-block-desc">e.g. 45 out of 200 students passed</div>
+      <div class="formula">Part ÷ Total × 100</div>
+      <div class="input-row">
+        <input type="number" id="c6-part" placeholder="45"/>
+        <span>out of</span>
+        <input type="number" id="c6-total" placeholder="200"/>
+      </div>
+      <button class="calc-btn" onclick="calc6()">Calculate</button>
+      <div class="result-box" id="r6">
+        <div class="result-label">Percentage</div>
+        <div class="result-value" id="r6-val"></div>
+        <div class="result-sub" id="r6-sub"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function fmt(n) { return parseFloat(n.toFixed(4)).toLocaleString(); }
+function show(id, val, sub) {
+  const box = document.getElementById(id);
+  box.classList.add('show');
+  document.getElementById(id+'-val').textContent = val;
+  document.getElementById(id+'-sub').textContent = sub;
+  gtag('event', 'calculate_percentage', { type: id });
+}
+function calc1() {
+  const p = parseFloat(document.getElementById('c1-pct').value);
+  const n = parseFloat(document.getElementById('c1-num').value);
+  if (isNaN(p)||isNaN(n)) return;
+  const r = (p/100)*n;
+  show('r1', fmt(r), `${p}% of ${n} = ${fmt(r)}`);
+}
+function calc2() {
+  const x = parseFloat(document.getElementById('c2-x').value);
+  const y = parseFloat(document.getElementById('c2-y').value);
+  if (isNaN(x)||isNaN(y)||y===0) return;
+  const r = (x/y)*100;
+  show('r2', fmt(r)+'%', `${x} is ${fmt(r)}% of ${y}`);
+}
+function calc3() {
+  const o = parseFloat(document.getElementById('c3-old').value);
+  const n = parseFloat(document.getElementById('c3-new').value);
+  if (isNaN(o)||isNaN(n)||o===0) return;
+  const r = ((n-o)/Math.abs(o))*100;
+  const dir = r >= 0 ? 'increase' : 'decrease';
+  show('r3', (r>=0?'+':'')+fmt(r)+'%', `${Math.abs(fmt(r))}% ${dir} from ${o} to ${n}`);
+}
+function calc4() {
+  const n = parseFloat(document.getElementById('c4-num').value);
+  const p = parseFloat(document.getElementById('c4-pct').value);
+  if (isNaN(n)||isNaN(p)) return;
+  const r = n*(1+p/100);
+  show('r4', fmt(r), `${n} + ${p}% = ${fmt(r)} (added ${fmt(n*p/100)})`);
+}
+function calc5() {
+  const n = parseFloat(document.getElementById('c5-num').value);
+  const p = parseFloat(document.getElementById('c5-pct').value);
+  if (isNaN(n)||isNaN(p)) return;
+  const r = n*(1-p/100);
+  show('r5', fmt(r), `${n} − ${p}% = ${fmt(r)} (removed ${fmt(n*p/100)})`);
+}
+function calc6() {
+  const part = parseFloat(document.getElementById('c6-part').value);
+  const total = parseFloat(document.getElementById('c6-total').value);
+  if (isNaN(part)||isNaN(total)||total===0) return;
+  const r = (part/total)*100;
+  show('r6', fmt(r)+'%', `${part} is ${fmt(r)}% of ${total}`);
+}
+</script>
+</body>
+</html>
