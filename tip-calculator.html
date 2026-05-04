@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="google-site-verification" content="8xoCHSxTbp13dUR2rUb6v3Tf6GYnj19vat8v_6-hBlY"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tip Calculator — CalculatrHub</title>
 <meta name="description" content="Free tip calculator. Calculate the tip amount and split the bill between any number of people. Instant results, no sign-up needed."/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#2563EB"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="CalculatrHub"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -187,5 +194,35 @@ function calculate() {
 
 calculate();
 </script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").then(()=>console.log("SW registered")).catch(e=>console.log("SW error",e));}</script>
+<style>
+.seo-section{max-width:900px;margin:0 auto;padding:48px 24px}
+.seo-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-0.8px;margin-bottom:16px;color:#0A0A0A}
+.seo-section h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px;color:#0A0A0A;letter-spacing:-0.3px}
+.seo-section p{font-size:15px;color:#495057;line-height:1.8;margin-bottom:16px}
+.seo-section ul{font-size:15px;color:#495057;line-height:1.8;padding-left:20px;margin-bottom:16px}
+.seo-section li{margin-bottom:6px}
+.seo-divider{border:none;border-top:1px solid #E9ECEF;margin:40px 0}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+.faq-item{background:#F8F9FA;border-radius:12px;padding:18px}
+.faq-item h3{font-size:14px;margin-bottom:8px}
+.faq-item p{font-size:14px;margin-bottom:0;color:#495057}
+@media(max-width:700px){.faq-grid{grid-template-columns:1fr}}
+</style>
+<div style="background:#F8F9FA;border-top:1px solid #E9ECEF">
+<div class="seo-section">
+  <h2>How to use the tip calculator</h2>
+  <p>Our free tip calculator works out the tip amount and splits the total bill between any number of people. Choose from preset tip percentages of 5%, 10%, 15%, 20% or 25%, or enter a custom amount. The calculator instantly shows the tip amount, total bill including tip, and exactly how much each person pays when splitting.</p>
+  <hr class="seo-divider"/>
+  <h2>How is it calculated?</h2>
+  <p>Tip amount = bill total × tip percentage ÷ 100. Total bill = original bill + tip amount. Per person amount = total bill ÷ number of people. The calculator updates in real-time as you change any value, so you always have the latest figures at your fingertips.</p>
+  <hr class="seo-divider"/>
+  <h2>Frequently asked questions</h2>
+  <div class="faq-grid"><div class="faq-item"><h3>How much should I tip at a restaurant?</h3><p>In the UK, tipping 10–15% at restaurants is standard and appreciated but not obligatory. In the US, 15–20% is the norm and considered mandatory for good service, with 20%+ for excellent service.</p></div><div class="faq-item"><h3>How do I split a restaurant bill equally?</h3><p>Use our tip calculator — enter the total bill, select your tip percentage, and set the number of people. It instantly shows how much each person owes including their share of the tip.</p></div><div class="faq-item"><h3>What is a 15% tip on £50?</h3><p>A 15% tip on a £50 bill is £7.50, making the total £57.50. If splitting between 2 people, each person pays £28.75. Our calculator works this out instantly for any amount.</p></div><div class="faq-item"><h3>Do you tip in the UK?</h3><p>Tipping in the UK is appreciated but less expected than in the US. It's customary to tip 10–15% at sit-down restaurants, round up taxi fares, and tip hotel porters and hairdressers. Always check if a service charge has already been added.</p></div><div class="faq-item"><h3>How much do you tip for delivery?</h3><p>For food delivery in the UK, tipping £1–3 is appreciated. In the US, 15–20% of the order value is standard for delivery drivers. Check if a delivery fee or service charge is already included before adding a tip.</p></div><div class="faq-item"><h3>Should I tip on the pre-tax or post-tax amount?</h3><p>There's no strict rule. In the US, it's common to tip on the pre-tax subtotal. In the UK, tipping on the total bill is more typical. Our calculator uses the bill amount you enter — just enter pre-tax or post-tax as you prefer.</p></div></div>
+  <hr class="seo-divider"/>
+  <h2>Related calculators</h2>
+  <ul><li><a href="/percentage-calculator.html" style="color:#2563EB">Percentage calculator</a> — work out any percentage calculation instantly</li><li><a href="/currency-converter.html" style="color:#2563EB">Currency converter</a> — convert between currencies when travelling abroad</li></ul>
+</div>
+</div>
 </body>
 </html>

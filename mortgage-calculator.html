@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="google-site-verification" content="8xoCHSxTbp13dUR2rUb6v3Tf6GYnj19vat8v_6-hBlY"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Mortgage Calculator — CalculatrHub</title>
 <meta name="description" content="Free UK & US mortgage repayment calculator. Calculate monthly payments, total interest and get a full amortisation schedule instantly."/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#2563EB"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="CalculatrHub"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
 <script>
@@ -455,5 +462,105 @@ function renderTable(view) {
 calculate();
 </script>
 
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").then(()=>console.log("SW registered")).catch(e=>console.log("SW error",e));}</script>
+
+<style>
+.seo-section{max-width:1100px;margin:0 auto;padding:48px 24px}
+.seo-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-0.8px;margin-bottom:16px;color:#0A0A0A}
+.seo-section h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;color:#0A0A0A;letter-spacing:-0.3px}
+.seo-section p{font-size:15px;color:#495057;line-height:1.8;margin-bottom:16px}
+.seo-section ul{font-size:15px;color:#495057;line-height:1.8;padding-left:20px;margin-bottom:16px}
+.seo-section li{margin-bottom:6px}
+.seo-divider{border:none;border-top:1px solid #E9ECEF;margin:40px 0}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
+.faq-item{background:#F8F9FA;border-radius:12px;padding:20px}
+.faq-item h3{font-size:15px;margin-bottom:8px}
+.faq-item p{font-size:14px;margin-bottom:0}
+.content-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:16px}
+.content-card{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:20px}
+.content-card h3{font-size:15px;color:#1E40AF;margin-bottom:8px}
+.content-card p{font-size:14px;color:#1E40AF;margin-bottom:0;opacity:0.8}
+@media(max-width:700px){.faq-grid{grid-template-columns:1fr}.content-grid{grid-template-columns:1fr}}
+</style>
+
+<div style="background:#F8F9FA;border-top:1px solid #E9ECEF">
+<div class="seo-section">
+
+  <h2>How to use the mortgage repayment calculator</h2>
+  <p>Our free mortgage calculator lets you work out your monthly repayments in seconds. Simply enter your property price, deposit amount, mortgage term and interest rate. The calculator instantly shows your monthly repayment, total amount repaid over the life of the mortgage, total interest paid, and your loan-to-value (LTV) ratio. You can also toggle between UK and US modes and add optional costs like council tax or home insurance to get a full picture of your monthly outgoings.</p>
+
+  <div class="content-grid">
+    <div class="content-card">
+      <h3>Monthly repayment</h3>
+      <p>Your fixed monthly capital and interest payment based on your loan amount, term and interest rate.</p>
+    </div>
+    <div class="content-card">
+      <h3>Total interest paid</h3>
+      <p>The total amount of interest you'll pay over the full mortgage term — often more than the loan itself.</p>
+    </div>
+    <div class="content-card">
+      <h3>Amortisation schedule</h3>
+      <p>A full month-by-month breakdown showing exactly how much goes to interest vs principal each month.</p>
+    </div>
+  </div>
+
+  <hr class="seo-divider"/>
+
+  <h2>How is a mortgage repayment calculated?</h2>
+  <p>Mortgage repayments are calculated using the standard amortisation formula. Each monthly payment covers both the interest on the outstanding balance and a portion of the principal (the original loan amount). In the early years of a mortgage, the majority of your payment goes toward interest. As the balance reduces over time, a greater proportion goes toward paying off the principal.</p>
+  <p>The formula used is: <strong>M = P × [r(1+r)^n] / [(1+r)^n - 1]</strong> — where M is the monthly payment, P is the principal loan amount, r is the monthly interest rate, and n is the number of payments.</p>
+
+  <hr class="seo-divider"/>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h3>What is a good mortgage interest rate?</h3>
+      <p>In the UK, a competitive mortgage rate in 2024–2025 is typically between 4% and 5% for a 2-year fixed deal. Rates vary depending on your LTV, credit score and the type of mortgage product you choose.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How much deposit do I need for a mortgage?</h3>
+      <p>Most lenders require a minimum deposit of 5–10% of the property value. A 10% deposit gives you a 90% LTV mortgage. The larger your deposit, the lower your interest rate is likely to be.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is LTV (Loan to Value)?</h3>
+      <p>LTV is the ratio of your mortgage to the value of the property. A £320,000 mortgage on a £400,000 property is 80% LTV. Lower LTV ratios typically attract better interest rates from lenders.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is the difference between capital repayment and interest only?</h3>
+      <p>On a capital repayment mortgage, each payment reduces your debt. On interest only, you only pay the interest each month and the full loan remains at the end of the term. Most residential mortgages are capital repayment.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How long should my mortgage term be?</h3>
+      <p>The most common mortgage term in the UK is 25 years. A longer term means lower monthly payments but more interest paid overall. A shorter term means higher payments but you own your home outright sooner.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I overpay my mortgage?</h3>
+      <p>Most mortgages allow overpayments of up to 10% of the outstanding balance per year without penalty. Overpaying reduces your balance faster, cuts total interest paid, and shortens your mortgage term.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is stamp duty in the UK?</h3>
+      <p>Stamp Duty Land Tax (SDLT) is a tax paid when buying property in England and Northern Ireland. Rates vary depending on the property price, whether you're a first-time buyer, and whether it's an additional property.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How much can I borrow for a mortgage?</h3>
+      <p>Most lenders will lend between 4 and 4.5 times your annual income. Some lenders offer up to 5.5x for certain professions. Use our affordability calculator to estimate how much you could borrow.</p>
+    </div>
+  </div>
+
+  <hr class="seo-divider"/>
+
+  <h2>Related calculators</h2>
+  <p>Use these alongside the mortgage calculator to get a complete picture of your property finances.</p>
+  <ul>
+    <li><a href="/loan-calculator.html" style="color:#2563EB">Loan calculator</a> — calculate repayments on personal loans, car finance and more</li>
+    <li><a href="/salary-calculator.html" style="color:#2563EB">Salary & tax calculator</a> — work out your take-home pay to assess affordability</li>
+    <li><a href="/percentage-calculator.html" style="color:#2563EB">Percentage calculator</a> — quickly calculate deposit percentages and LTV ratios</li>
+  </ul>
+
+</div>
+</div>
+
 </body>
 </html>
+<!-- SEO CONTENT SECTION - injected before closing body tag -->

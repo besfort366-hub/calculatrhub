@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="google-site-verification" content="8xoCHSxTbp13dUR2rUb6v3Tf6GYnj19vat8v_6-hBlY"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Currency Converter — CalculatrHub</title>
 <meta name="description" content="Free currency converter. Convert between 30+ major currencies with live exchange rates. Instant results, no sign-up needed."/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#2563EB"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="CalculatrHub"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -170,5 +177,35 @@ popular.forEach(([from, to]) => {
 
 convert();
 </script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").then(()=>console.log("SW registered")).catch(e=>console.log("SW error",e));}</script>
+<style>
+.seo-section{max-width:900px;margin:0 auto;padding:48px 24px}
+.seo-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-0.8px;margin-bottom:16px;color:#0A0A0A}
+.seo-section h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px;color:#0A0A0A;letter-spacing:-0.3px}
+.seo-section p{font-size:15px;color:#495057;line-height:1.8;margin-bottom:16px}
+.seo-section ul{font-size:15px;color:#495057;line-height:1.8;padding-left:20px;margin-bottom:16px}
+.seo-section li{margin-bottom:6px}
+.seo-divider{border:none;border-top:1px solid #E9ECEF;margin:40px 0}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+.faq-item{background:#F8F9FA;border-radius:12px;padding:18px}
+.faq-item h3{font-size:14px;margin-bottom:8px}
+.faq-item p{font-size:14px;margin-bottom:0;color:#495057}
+@media(max-width:700px){.faq-grid{grid-template-columns:1fr}}
+</style>
+<div style="background:#F8F9FA;border-top:1px solid #E9ECEF">
+<div class="seo-section">
+  <h2>How to use the currency converter</h2>
+  <p>Our free currency converter lets you convert between 30+ major world currencies instantly. Enter any amount, select your from and to currencies, and get the converted value immediately. Popular currency pairs like GBP to USD, EUR to GBP and USD to JPY are featured for quick reference. The converter includes all major currencies from G20 nations plus popular travel destinations.</p>
+  <hr class="seo-divider"/>
+  <h2>How is it calculated?</h2>
+  <p>Currency conversion works by multiplying the amount by the exchange rate between the two currencies. All rates are calculated relative to the US Dollar as the base currency. To convert GBP to EUR, for example, the GBP/USD rate is divided by the EUR/USD rate to give the GBP/EUR cross rate.</p>
+  <hr class="seo-divider"/>
+  <h2>Frequently asked questions</h2>
+  <div class="faq-grid"><div class="faq-item"><h3>What is the exchange rate for GBP to USD?</h3><p>The GBP/USD exchange rate fluctuates daily based on economic conditions, interest rates and market sentiment. Our converter uses indicative rates — for live rates for financial transactions, always check with your bank or a regulated broker.</p></div><div class="faq-item"><h3>How do I convert currency for travel?</h3><p>Use our converter to check the approximate rate, then compare offers from your bank, a currency exchange or online providers like Wise or Revolut. Airport exchanges typically offer the worst rates — order currency in advance or use a travel card.</p></div><div class="faq-item"><h3>What is the strongest currency in the world?</h3><p>The Kuwaiti Dinar (KWD) is consistently the highest-valued currency against the US Dollar. The British Pound (GBP), Swiss Franc (CHF) and Euro (EUR) are among the strongest major currencies.</p></div><div class="faq-item"><h3>What does EUR/USD mean?</h3><p>EUR/USD is a currency pair showing how many US Dollars one Euro buys. If EUR/USD = 1.08, one Euro buys $1.08. The first currency is the base and the second is the quote currency.</p></div><div class="faq-item"><h3>Why do exchange rates change?</h3><p>Exchange rates change constantly based on interest rate decisions, inflation data, economic growth figures, political events and market sentiment. Major central bank announcements (like the Bank of England or Federal Reserve) can cause large rate movements.</p></div><div class="faq-item"><h3>What is the best way to exchange currency?</h3><p>Specialist online providers like Wise, Revolut or Caxton typically offer rates closest to the mid-market rate with low fees. Banks are convenient but often add large margins. Avoid airport and hotel exchanges which have the highest fees.</p></div></div>
+  <hr class="seo-divider"/>
+  <h2>Related calculators</h2>
+  <ul><li><a href="/tip-calculator.html" style="color:#2563EB">Tip calculator</a> — calculate tips when dining abroad</li><li><a href="/salary-calculator.html" style="color:#2563EB">Salary calculator</a> — convert international salaries to your local currency</li></ul>
+</div>
+</div>
 </body>
 </html>
