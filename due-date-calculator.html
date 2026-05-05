@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="google-site-verification" content="8xoCHSxTbp13dUR2rUb6v3Tf6GYnj19vat8v_6-hBlY"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Due Date Calculator — Pregnancy Due Date | CalculatrHub</title>
+<meta name="description" content="Free pregnancy due date calculator. Calculate your estimated due date from your last period or conception date. See your full pregnancy timeline week by week."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#2563EB"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563EB;--blue-light:#DBEAFE;--blue-dark:#1E40AF;--black:#0A0A0A;--white:#FFFFFF;--gray-50:#F8F9FA;--gray-100:#F1F3F5;--gray-200:#E9ECEF;--gray-400:#868E96;--gray-600:#495057;--pink:#DB2777;--pink-light:#FCE7F3;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius-lg:20px;}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:900px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+.main{max-width:900px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:start}
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px}
+.toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-100);border-radius:8px;padding:3px;margin-bottom:20px}
+.toggle button{border:none;background:none;padding:8px;font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--gray-400);border-radius:6px;cursor:pointer;transition:all 0.15s}
+.toggle button.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.field input,.field select{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.field input:focus{border-color:var(--blue)}
+.calc-btn{width:100%;padding:14px;background:var(--pink);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s;margin-top:4px}
+.calc-btn:hover{background:#BE185D}
+.results{display:flex;flex-direction:column;gap:16px}
+.result-hero{background:var(--pink-light);border:1px solid #FBCFE8;border-radius:var(--radius-lg);padding:28px;text-align:center}
+.result-date{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px;color:var(--pink);margin-bottom:4px}
+.result-label{font-size:12px;color:var(--pink);opacity:0.7;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.result-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid #FBCFE8}
+.stat-box{text-align:center}
+.stat-val{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-0.5px;color:var(--pink)}
+.stat-label{font-size:11px;color:var(--pink);opacity:0.6;text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.trimester-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.trimester-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.trimester-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--gray-100);font-size:14px}
+.trimester-row:last-child{border-bottom:none}
+.trimester-name{font-weight:500;color:var(--black)}
+.trimester-dates{font-size:13px;color:var(--gray-400)}
+.trimester-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:100px}
+.milestone-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.milestone-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+.milestone-row{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:14px;align-items:flex-start}
+.milestone-row:last-child{border-bottom:none}
+.milestone-week{font-family:var(--font-display);font-weight:700;color:var(--pink);min-width:60px;font-size:13px}
+.milestone-text{color:var(--gray-600);line-height:1.4}
+@media(max-width:800px){.main{grid-template-columns:1fr;padding:20px 16px}.form-card{position:static}.result-stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-mark"><span></span><span></span><span></span><span></span></div><div class="logo-text">Calculatr<em>HUB</em></div></a>
+    <a href="/" class="back-link"><svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>All calculators</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Due date calculator</div>
+    <h1>Due date calculator 🤰</h1>
+    <p class="page-sub">Calculate your estimated due date and full pregnancy timeline.</p>
+  </div>
+</div>
+<div class="main">
+  <div class="form-card">
+    <div class="toggle">
+      <button class="active" id="btn-lmp" onclick="setMethod('lmp')">Last period</button>
+      <button id="btn-con" onclick="setMethod('conception')">Conception date</button>
+    </div>
+    <div id="lmp-section">
+      <div class="form-title">Last menstrual period</div>
+      <div class="field">
+        <label>First day of last period</label>
+        <input type="date" id="lmp-date"/>
+      </div>
+      <div class="field">
+        <label>Average cycle length</label>
+        <select id="cycle-length">
+          <option value="21">21 days</option>
+          <option value="22">22 days</option>
+          <option value="23">23 days</option>
+          <option value="24">24 days</option>
+          <option value="25">25 days</option>
+          <option value="26">26 days</option>
+          <option value="27">27 days</option>
+          <option value="28" selected>28 days (average)</option>
+          <option value="29">29 days</option>
+          <option value="30">30 days</option>
+          <option value="31">31 days</option>
+          <option value="32">32 days</option>
+          <option value="33">33 days</option>
+          <option value="34">34 days</option>
+          <option value="35">35 days</option>
+        </select>
+      </div>
+    </div>
+    <div id="conception-section" style="display:none">
+      <div class="form-title">Conception date</div>
+      <div class="field">
+        <label>Estimated conception date</label>
+        <input type="date" id="conception-date"/>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate due date</button>
+  </div>
+
+  <div class="results" id="results">
+    <div style="text-align:center;padding:60px 20px;color:var(--gray-400);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)">
+      <div style="font-size:40px;margin-bottom:12px">🤰</div>
+      <p>Enter your last period date to calculate your due date</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.seo-section{max-width:900px;margin:0 auto;padding:48px 24px}
+.seo-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,28px);font-weight:800;letter-spacing:-0.8px;margin-bottom:16px;color:#0A0A0A}
+.seo-section h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px;color:#0A0A0A}
+.seo-section p{font-size:15px;color:#495057;line-height:1.8;margin-bottom:16px}
+.seo-section ul{font-size:15px;color:#495057;line-height:1.8;padding-left:20px;margin-bottom:16px}
+.seo-section li{margin-bottom:6px}
+.seo-divider{border:none;border-top:1px solid #E9ECEF;margin:40px 0}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+.faq-item{background:#F8F9FA;border-radius:12px;padding:18px}
+.faq-item h3{font-size:14px;margin-bottom:8px}
+.faq-item p{font-size:14px;margin-bottom:0;color:#495057}
+@media(max-width:700px){.faq-grid{grid-template-columns:1fr}}
+</style>
+<div style="background:#F8F9FA;border-top:1px solid #E9ECEF">
+<div class="seo-section">
+  <h2>How is a due date calculated?</h2>
+  <p>The most common method is Naegele's rule: add 280 days (40 weeks) to the first day of your last menstrual period (LMP). This assumes a 28-day cycle with ovulation on day 14. If your cycle is longer or shorter, the calculator adjusts accordingly. Only about 5% of babies are born exactly on their due date — most arrive within two weeks either side.</p>
+  <hr class="seo-divider"/>
+  <h2>Frequently asked questions</h2>
+  <div class="faq-grid">
+    <div class="faq-item"><h3>How accurate is a due date calculator?</h3><p>Due date calculators give an estimated due date (EDD) based on your last period. Only about 5% of babies are born on their exact due date. An early ultrasound (before 14 weeks) is the most accurate way to confirm your due date.</p></div>
+    <div class="faq-item"><h3>What is a full-term pregnancy?</h3><p>A full-term pregnancy is 39–40 weeks. Early term is 37–38 weeks, late term is 41 weeks, and post-term is 42+ weeks. Babies born before 37 weeks are considered premature (preterm).</p></div>
+    <div class="faq-item"><h3>How many weeks is a pregnancy?</h3><p>A pregnancy is typically 40 weeks (280 days) from the first day of your last menstrual period, or approximately 38 weeks from conception. This is divided into three trimesters of roughly 13 weeks each.</p></div>
+    <div class="faq-item"><h3>What is the first trimester?</h3><p>The first trimester covers weeks 1–13 of pregnancy. During this time, the baby's organs form, the heartbeat begins around week 6, and the risk of miscarriage is highest. Most women experience morning sickness during this period.</p></div>
+    <div class="faq-item"><h3>When can I find out the sex of my baby?</h3><p>The baby's sex can usually be determined by ultrasound between weeks 18–20 during the anatomy scan. Some DNA blood tests (NIPT) can determine sex as early as 10 weeks into pregnancy.</p></div>
+    <div class="faq-item"><h3>What if my cycle is not 28 days?</h3><p>If your cycle is shorter or longer than 28 days, your ovulation and conception date will differ. Our calculator adjusts for cycle length — a 35-day cycle shifts your estimated due date forward by 7 days compared to a 28-day cycle.</p></div>
+  </div>
+</div>
+</div>
+
+<script>
+let method = 'lmp';
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('lmp-date').max = today;
+document.getElementById('conception-date').max = today;
+
+function setMethod(m) {
+  method = m;
+  document.getElementById('lmp-section').style.display = m === 'lmp' ? 'block' : 'none';
+  document.getElementById('conception-section').style.display = m === 'conception' ? 'block' : 'none';
+  document.getElementById('btn-lmp').classList.toggle('active', m === 'lmp');
+  document.getElementById('btn-con').classList.toggle('active', m === 'conception');
+}
+
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+function addDays(date, days) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+function fmtDate(d) { return `${dayNames[d.getDay()]}, ${monthNames[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`; }
+function fmtShort(d) { return `${monthNames[d.getMonth()].slice(0,3)} ${d.getDate()}, ${d.getFullYear()}`; }
+
+function calculate() {
+  let lmp;
+  if (method === 'lmp') {
+    const v = document.getElementById('lmp-date').value;
+    if (!v) return;
+    const cycleAdj = (parseInt(document.getElementById('cycle-length').value) || 28) - 28;
+    lmp = new Date(v);
+    lmp.setDate(lmp.getDate() - cycleAdj);
+  } else {
+    const v = document.getElementById('conception-date').value;
+    if (!v) return;
+    lmp = addDays(new Date(v), -14);
+  }
+
+  const dueDate = addDays(lmp, 280);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const daysPregnant = Math.floor((today - lmp) / 86400000);
+  const weeksPregnant = Math.floor(daysPregnant / 7);
+  const daysRemainder = daysPregnant % 7;
+  const daysUntilDue = Math.ceil((dueDate - today) / 86400000);
+
+  // Trimesters
+  const t1end = addDays(lmp, 13*7);
+  const t2end = addDays(lmp, 27*7);
+  const t3end = dueDate;
+
+  // Milestones
+  const milestones = [
+    { week: 4, text: 'Embryo implants in the uterus' },
+    { week: 6, text: 'Heartbeat detectable by ultrasound' },
+    { week: 8, text: 'Baby is now called a fetus, organs forming' },
+    { week: 10, text: 'Fingernails and toenails begin to develop' },
+    { week: 12, text: 'End of first trimester, miscarriage risk drops significantly' },
+    { week: 16, text: 'Baby may start sucking their thumb' },
+    { week: 20, text: 'Anatomy scan — sex of baby can be determined' },
+    { week: 24, text: 'Baby reaches viability outside the womb' },
+    { week: 28, text: 'Third trimester begins' },
+    { week: 32, text: 'Baby is gaining weight rapidly' },
+    { week: 36, text: 'Baby is considered early term' },
+    { week: 40, text: 'Estimated due date 🎉' },
+  ].map(m => ({ ...m, date: addDays(lmp, m.week * 7) }));
+
+  const isPregnant = daysPregnant >= 0 && daysPregnant <= 294;
+  const currentTrimester = weeksPregnant <= 13 ? 1 : weeksPregnant <= 27 ? 2 : 3;
+
+  document.getElementById('results').innerHTML = `
+    <div class="result-hero">
+      <div class="result-label">Estimated due date</div>
+      <div class="result-date">${fmtDate(dueDate)}</div>
+      ${isPregnant ? `
+      <div class="result-stats">
+        <div class="stat-box"><div class="stat-val">${weeksPregnant}+${daysRemainder}</div><div class="stat-label">Weeks pregnant</div></div>
+        <div class="stat-box"><div class="stat-val">${currentTrimester}</div><div class="stat-label">Trimester</div></div>
+        <div class="stat-box"><div class="stat-val">${Math.max(0,daysUntilDue)}</div><div class="stat-label">Days to go</div></div>
+      </div>` : ''}
+    </div>
+
+    <div class="trimester-card">
+      <div class="trimester-title">Pregnancy trimesters</div>
+      <div class="trimester-row">
+        <span class="trimester-name">First trimester</span>
+        <span class="trimester-dates">${fmtShort(lmp)} – ${fmtShort(t1end)}</span>
+        <span class="trimester-badge" style="background:#DBEAFE;color:#1E40AF">Weeks 1–13</span>
+      </div>
+      <div class="trimester-row">
+        <span class="trimester-name">Second trimester</span>
+        <span class="trimester-dates">${fmtShort(addDays(t1end,1))} – ${fmtShort(t2end)}</span>
+        <span class="trimester-badge" style="background:#D1FAE5;color:#065F46">Weeks 14–27</span>
+      </div>
+      <div class="trimester-row">
+        <span class="trimester-name">Third trimester</span>
+        <span class="trimester-dates">${fmtShort(addDays(t2end,1))} – ${fmtShort(t3end)}</span>
+        <span class="trimester-badge" style="background:#FCE7F3;color:#9D174D">Weeks 28–40</span>
+      </div>
+    </div>
+
+    <div class="milestone-card">
+      <div class="milestone-title">Key milestones</div>
+      ${milestones.map(m => `
+        <div class="milestone-row">
+          <span class="milestone-week">Week ${m.week}</span>
+          <div>
+            <div style="font-size:13px;color:var(--gray-400);margin-bottom:2px">${fmtShort(m.date)}</div>
+            <div class="milestone-text">${m.text}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  gtag('event', 'calculate_due_date', { method });
+}
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js");}</script>
+</body>
+</html>

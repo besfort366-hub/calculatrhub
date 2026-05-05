@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="google-site-verification" content="8xoCHSxTbp13dUR2rUb6v3Tf6GYnj19vat8v_6-hBlY"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hourly to Salary Calculator — CalculatrHub</title>
+<meta name="description" content="Free hourly to salary calculator. Convert your hourly wage to annual, monthly, weekly and daily salary instantly. Works for any hourly rate."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#2563EB"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5RFTG7SJW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S5RFTG7SJW');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563EB;--blue-light:#DBEAFE;--blue-dark:#1E40AF;--black:#0A0A0A;--white:#FFFFFF;--gray-50:#F8F9FA;--gray-100:#F1F3F5;--gray-200:#E9ECEF;--gray-400:#868E96;--gray-600:#495057;--green:#059669;--green-light:#D1FAE5;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius-lg:20px;}
+body{font-family:var(--font-body);background:var(--gray-50);color:var(--black);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+.logo-mark span{border-radius:3px;background:var(--blue)}
+.logo-mark span:nth-child(2),.logo-mark span:nth-child(3){opacity:0.3}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--black);letter-spacing:-0.4px}
+.logo-text em{font-style:normal;font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;display:block;line-height:1;margin-top:1px}
+.back-link{font-size:14px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px}
+.page-header-inner{max-width:1000px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+h1{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-1px}
+.page-sub{font-size:15px;color:var(--gray-600);margin-top:6px;font-weight:300}
+.main{max-width:1000px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:start}
+.form-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px;position:sticky;top:80px}
+.form-title{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:20px}
+.toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-100);border-radius:8px;padding:3px;margin-bottom:20px}
+.toggle button{border:none;background:none;padding:8px;font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--gray-400);border-radius:6px;cursor:pointer;transition:all 0.15s}
+.toggle button.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:6px}
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-prefix{position:absolute;left:12px;font-size:14px;color:var(--gray-400);pointer-events:none}
+.input-suffix{position:absolute;right:12px;font-size:13px;color:var(--gray-400);pointer-events:none}
+.input-wrap input{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;border:1px solid var(--gray-200);border-radius:8px;outline:none;background:var(--white);color:var(--black);transition:border-color 0.15s}
+.input-wrap input:focus{border-color:var(--blue)}
+.has-prefix input{padding-left:28px}
+.has-suffix input{padding-right:44px}
+.calc-btn{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.15s;margin-top:4px}
+.calc-btn:hover{background:var(--blue-dark)}
+.results{display:flex;flex-direction:column;gap:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.result-box{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px;text-align:center}
+.result-box.featured{background:var(--green-light);border-color:#A7F3D0;grid-column:1/-1}
+.result-box-label{font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.result-box.featured .result-box-label{color:#065F46}
+.result-box-val{font-family:var(--font-display);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--black)}
+.result-box.featured .result-box-val{font-size:48px;color:#065F46;letter-spacing:-2px}
+.result-box-sub{font-size:12px;color:var(--gray-400);margin-top:4px}
+.result-box.featured .result-box-sub{color:#065F46;opacity:0.7}
+.common-table{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px}
+.common-title{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.8px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+tbody tr{border-bottom:1px solid var(--gray-100)}
+tbody tr.highlight{background:var(--blue-light);font-weight:600}
+tbody td{padding:9px 10px}
+@media(max-width:860px){.main{grid-template-columns:1fr;padding:20px 16px}.form-card{position:static}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-mark"><span></span><span></span><span></span><span></span></div><div class="logo-text">Calculatr<em>HUB</em></div></a>
+    <a href="/" class="back-link"><svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>All calculators</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="/">Home</a> / Hourly to salary calculator</div>
+    <h1>Hourly to salary calculator</h1>
+    <p class="page-sub">Convert your hourly wage to annual, monthly, weekly and daily pay instantly.</p>
+  </div>
+</div>
+<div class="main">
+  <div class="form-card">
+    <div class="form-title">Your hourly rate</div>
+    <div class="toggle">
+      <button class="active" id="btn-usd" onclick="setCurrency('$','USD')">USD $</button>
+      <button id="btn-gbp" onclick="setCurrency('£','GBP')">GBP £</button>
+    </div>
+    <div class="field">
+      <label>Hourly wage</label>
+      <div class="input-wrap has-prefix">
+        <span class="input-prefix" id="sym">$</span>
+        <input type="number" id="hourly" value="25" min="0" step="0.25" oninput="calculate()"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Hours per week</label>
+      <div class="input-wrap has-suffix">
+        <input type="number" id="hours" value="40" min="1" max="168" oninput="calculate()"/>
+        <span class="input-suffix">hrs</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Weeks per year</label>
+      <div class="input-wrap has-suffix">
+        <input type="number" id="weeks" value="52" min="1" max="52" oninput="calculate()"/>
+        <span class="input-suffix">wks</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate salary</button>
+  </div>
+
+  <div class="results" id="results">
+    <div style="text-align:center;padding:60px 20px;color:var(--gray-400);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)">
+      <p>Enter your hourly rate above</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.seo-section{max-width:1000px;margin:0 auto;padding:48px 24px}
+.seo-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,28px);font-weight:800;letter-spacing:-0.8px;margin-bottom:16px;color:#0A0A0A}
+.seo-section h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px;color:#0A0A0A}
+.seo-section p{font-size:15px;color:#495057;line-height:1.8;margin-bottom:16px}
+.seo-section ul{font-size:15px;color:#495057;line-height:1.8;padding-left:20px;margin-bottom:16px}
+.seo-section li{margin-bottom:6px}
+.seo-divider{border:none;border-top:1px solid #E9ECEF;margin:40px 0}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+.faq-item{background:#F8F9FA;border-radius:12px;padding:18px}
+.faq-item h3{font-size:14px;margin-bottom:8px}
+.faq-item p{font-size:14px;margin-bottom:0;color:#495057}
+@media(max-width:700px){.faq-grid{grid-template-columns:1fr}}
+</style>
+<div style="background:#F8F9FA;border-top:1px solid #E9ECEF">
+<div class="seo-section">
+  <h2>How to use the hourly to salary calculator</h2>
+  <p>Enter your hourly wage, the number of hours you work per week and weeks per year. The calculator instantly converts to annual, monthly, weekly and daily salary. Toggle between USD and GBP. The standard full-time work year is 40 hours per week × 52 weeks = 2,080 hours per year.</p>
+  <hr class="seo-divider"/>
+  <h2>Common hourly rates converted to annual salary</h2>
+  <p>At 40 hours per week for 52 weeks: $15/hr = $31,200/yr · $20/hr = $41,600/yr · $25/hr = $52,000/yr · $30/hr = $62,400/yr · $35/hr = $72,800/yr · $40/hr = $83,200/yr · $50/hr = $104,000/yr · $75/hr = $156,000/yr · $100/hr = $208,000/yr.</p>
+  <hr class="seo-divider"/>
+  <h2>Frequently asked questions</h2>
+  <div class="faq-grid">
+    <div class="faq-item"><h3>$25 an hour is how much a year?</h3><p>$25 per hour × 40 hours per week × 52 weeks = $52,000 per year before taxes. Monthly that's $4,333, weekly $1,000 and daily $200 based on a standard full-time schedule.</p></div>
+    <div class="faq-item"><h3>$20 an hour is how much a year?</h3><p>$20 per hour × 40 hours × 52 weeks = $41,600 per year gross. Monthly gross pay is approximately $3,467. After federal taxes for a single filer, take-home pay is roughly $34,000–$36,000 annually.</p></div>
+    <div class="faq-item"><h3>$30 an hour is how much a year?</h3><p>$30 per hour working full-time (40 hours/week, 52 weeks) equals $62,400 per year before taxes. This is above the US median household income and represents a comfortable middle-class wage in most states.</p></div>
+    <div class="faq-item"><h3>How many hours a year is full-time?</h3><p>Full-time employment in the US is typically 40 hours per week × 52 weeks = 2,080 working hours per year. If you take 2 weeks of unpaid vacation, that drops to 2,000 hours (40 × 50).</p></div>
+    <div class="faq-item"><h3>How do I convert salary to hourly rate?</h3><p>Divide your annual salary by 2,080 (the standard full-time annual hours). For example, $52,000 ÷ 2,080 = $25 per hour. Adjust if you work different hours — divide by your actual annual hours worked.</p></div>
+    <div class="faq-item"><h3>What is the US minimum wage per year?</h3><p>The federal minimum wage is $7.25 per hour, which equals $15,080 per year at 2,080 hours. However, many states and cities have higher minimum wages — Washington State's is $18.67/hr ($38,833/yr) as of 2026.</p></div>
+  </div>
+  <hr class="seo-divider"/>
+  <h2>Related calculators</h2>
+  <ul>
+    <li><a href="/salary-calculator.html" style="color:#2563EB">Salary & tax calculator</a> — calculate your take-home pay after taxes</li>
+    <li><a href="/loan-calculator.html" style="color:#2563EB">Loan calculator</a> — see what loan payments look like on your salary</li>
+    <li><a href="/mortgage-calculator.html" style="color:#2563EB">Mortgage calculator</a> — calculate mortgage affordability on your wage</li>
+  </ul>
+</div>
+</div>
+
+<script>
+let sym = '$';
+
+function setCurrency(s, c) {
+  sym = s;
+  document.getElementById('sym').textContent = s;
+  document.getElementById('btn-usd').classList.toggle('active', c === 'USD');
+  document.getElementById('btn-gbp').classList.toggle('active', c === 'GBP');
+  calculate();
+}
+
+function fmt(n) { return sym + Math.round(n).toLocaleString(); }
+function fmtD(n) { return sym + n.toFixed(2); }
+
+function calculate() {
+  const hourly = parseFloat(document.getElementById('hourly').value) || 0;
+  const hours = parseFloat(document.getElementById('hours').value) || 40;
+  const weeks = parseFloat(document.getElementById('weeks').value) || 52;
+  if (!hourly) return;
+
+  const annual = hourly * hours * weeks;
+  const monthly = annual / 12;
+  const biweekly = annual / 26;
+  const weekly = hourly * hours;
+  const daily = hourly * (hours / 5);
+
+  // Common rates table
+  const commonRates = [15, 18, 20, 22, 25, 28, 30, 35, 40, 45, 50, 60, 75, 100];
+
+  document.getElementById('results').innerHTML = `
+    <div class="result-grid">
+      <div class="result-box featured">
+        <div class="result-box-label">Annual salary</div>
+        <div class="result-box-val">${fmt(annual)}</div>
+        <div class="result-box-sub">${hourly}/hr × ${hours} hrs × ${weeks} weeks</div>
+      </div>
+      <div class="result-box">
+        <div class="result-box-label">Monthly</div>
+        <div class="result-box-val">${fmt(monthly)}</div>
+        <div class="result-box-sub">per month</div>
+      </div>
+      <div class="result-box">
+        <div class="result-box-label">Biweekly</div>
+        <div class="result-box-val">${fmt(biweekly)}</div>
+        <div class="result-box-sub">every 2 weeks</div>
+      </div>
+      <div class="result-box">
+        <div class="result-box-label">Weekly</div>
+        <div class="result-box-val">${fmt(weekly)}</div>
+        <div class="result-box-sub">per week</div>
+      </div>
+      <div class="result-box">
+        <div class="result-box-label">Daily</div>
+        <div class="result-box-val">${fmtD(daily)}</div>
+        <div class="result-box-sub">per day (5-day week)</div>
+      </div>
+    </div>
+
+    <div class="common-table">
+      <div class="common-title">Common hourly rates → annual salary (40 hrs/week)</div>
+      <table>
+        <thead><tr><th>Hourly rate</th><th>Annual</th><th>Monthly</th><th>Weekly</th></tr></thead>
+        <tbody>
+          ${commonRates.map(r => `
+            <tr class="${Math.abs(r - hourly) < 1 ? 'highlight' : ''}">
+              <td>${sym}${r}/hr</td>
+              <td>${sym}${(r * 2080).toLocaleString()}</td>
+              <td>${sym}${Math.round(r * 2080 / 12).toLocaleString()}</td>
+              <td>${sym}${(r * 40).toLocaleString()}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+  gtag('event', 'calculate_hourly_salary', { hourly, annual });
+}
+
+calculate();
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js");}</script>
+</body>
+</html>
